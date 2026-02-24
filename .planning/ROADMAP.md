@@ -142,9 +142,9 @@ Plans:
 **Plans:** 3 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Version Management (snapshot, diff, rollback)
-- [ ] 06-02-PLAN.md — EPUB Export (Pandoc integration, metadata, templates)
-- [ ] 06-03-PLAN.md — /novel:publish Command (orchestrate publish workflow)
+- [x] 06-01-PLAN.md — Version Management (snapshot, diff, rollback)
+- [x] 06-02-PLAN.md — EPUB Export (Pandoc integration, metadata, templates)
+- [x] 06-03-PLAN.md — /novel:publish Command (orchestrate publish workflow)
 
 ---
 
@@ -184,4 +184,5 @@ Plans:
 *Phase 3 completed: 2026-02-24*
 *Phase 4 completed: 2026-02-24*
 *Phase 5 completed: 2026-02-24*
-*Phase 6 planned: 2026-02-24*
+*Phase 6 completed: 2026-02-24*
+*v1.0 MILESTONE COMPLETE: 2026-02-24*
