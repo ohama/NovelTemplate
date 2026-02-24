@@ -7,25 +7,25 @@
 
 ### Foundation
 
-- [ ] **FOUND-01**: 디렉토리 구조 초기화 (canon/, state/, beats/, draft/)
-- [ ] **FOUND-02**: JSON 상태 관리 (story_state, character_state, timeline_state, style_state)
-- [ ] **FOUND-03**: Git 통합 (씬 완성 시 자동 커밋)
-- [ ] **FOUND-04**: /novel:init 명령어 (프로젝트 초기화 스킬)
+- [x] **FOUND-01**: 디렉토리 구조 초기화 (canon/, state/, beats/, draft/)
+- [x] **FOUND-02**: JSON 상태 관리 (story_state, character_state, timeline_state, style_state)
+- [x] **FOUND-03**: Git 통합 (씬 완성 시 자동 커밋)
+- [x] **FOUND-04**: /novel:init 명령어 (프로젝트 초기화 스킬)
 
 ### Canon System
 
-- [ ] **CANON-01**: premise.md 템플릿 및 초기화 (장르, 로그라인, 테마, 결말 유형)
-- [ ] **CANON-02**: characters.md 템플릿 및 초기화 (캐릭터 프로필, 관계)
-- [ ] **CANON-03**: world.md 템플릿 및 초기화 (세계관, 배경 설정)
-- [ ] **CANON-04**: style_guide.md 템플릿 및 초기화 (시점, 시제, 문체, 금지어)
-- [ ] **CANON-05**: timeline.md 템플릿 및 초기화 (시간순 제약)
-- [ ] **CANON-06**: constraints.md 템플릿 및 초기화 (스토리 경계)
+- [x] **CANON-01**: premise.md 템플릿 및 초기화 (장르, 로그라인, 테마, 결말 유형)
+- [x] **CANON-02**: characters.md 템플릿 및 초기화 (캐릭터 프로필, 관계)
+- [x] **CANON-03**: world.md 템플릿 및 초기화 (세계관, 배경 설정)
+- [x] **CANON-04**: style_guide.md 템플릿 및 초기화 (시점, 시제, 문체, 금지어)
+- [x] **CANON-05**: timeline.md 템플릿 및 초기화 (시간순 제약)
+- [x] **CANON-06**: constraints.md 템플릿 및 초기화 (스토리 경계)
 
 ### Planning Agents
 
-- [ ] **AGENT-01**: novel-plot-planner 에이전트 (캐논에서 아웃라인 생성)
-- [ ] **AGENT-02**: novel-beat-planner 에이전트 (아웃라인에서 씬 스펙 생성)
-- [ ] **AGENT-03**: novel-diary-planner 에이전트 (일기체 특화 기획 — 날짜/계절)
+- [x] **AGENT-01**: novel-plot-planner 에이전트 (캐논에서 아웃라인 생성)
+- [x] **AGENT-02**: novel-beat-planner 에이전트 (아웃라인에서 씬 스펙 생성)
+- [x] **AGENT-03**: novel-diary-planner 에이전트 (일기체 특화 기획 — 날짜/계절)
 
 ### Drafting Agents
 
@@ -43,11 +43,11 @@
 
 ### Commands
 
-- [ ] **CMD-01**: /novel:init 스킬 (프로젝트 초기화)
+- [x] **CMD-01**: /novel:init 스킬 (프로젝트 초기화)
 - [ ] **CMD-02**: /novel:write 스킬 (다음 씬/일기 작성)
 - [ ] **CMD-03**: /novel:check 스킬 (일관성 검사)
-- [ ] **CMD-04**: /novel:status 스킬 (진행 상황 확인)
-- [ ] **CMD-05**: /novel:outline 스킬 (아웃라인 생성)
+- [x] **CMD-04**: /novel:status 스킬 (진행 상황 확인)
+- [x] **CMD-05**: /novel:outline 스킬 (아웃라인 생성)
 - [ ] **CMD-06**: /novel:publish 스킬 (챕터 컴파일)
 
 ### Diary Format Support
@@ -95,50 +95,60 @@
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| FOUND-01 | Phase 1 | Pending |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Pending |
-| FOUND-04 | Phase 1 | Pending |
-| CANON-01 | Phase 1 | Pending |
-| CANON-02 | Phase 1 | Pending |
-| CANON-03 | Phase 1 | Pending |
-| CANON-04 | Phase 1 | Pending |
-| CANON-05 | Phase 1 | Pending |
-| CANON-06 | Phase 1 | Pending |
-| AGENT-01 | Phase 2 | Pending |
-| AGENT-02 | Phase 2 | Pending |
-| AGENT-03 | Phase 2 | Pending |
-| AGENT-04 | Phase 3 | Pending |
-| AGENT-05 | Phase 5 | Pending |
-| AGENT-06 | Phase 5 | Pending |
-| AGENT-07 | Phase 4 | Pending |
-| AGENT-08 | Phase 4 | Pending |
-| AGENT-09 | Phase 4 | Pending |
-| AGENT-10 | Phase 4 | Pending |
-| AGENT-11 | Phase 4 | Pending |
-| CMD-01 | Phase 1 | Pending |
-| CMD-02 | Phase 3 | Pending |
-| CMD-03 | Phase 4 | Pending |
-| CMD-04 | Phase 1 | Pending |
-| CMD-05 | Phase 2 | Pending |
-| CMD-06 | Phase 6 | Pending |
-| DIARY-01 | Phase 3 | Pending |
-| DIARY-02 | Phase 3 | Pending |
-| DIARY-03 | Phase 3 | Pending |
-| DIARY-04 | Phase 3 | Pending |
-| VER-01 | Phase 6 | Pending |
-| VER-02 | Phase 6 | Pending |
-| VER-03 | Phase 6 | Pending |
-| OUT-01 | Phase 3 | Pending |
-| OUT-02 | Phase 6 | Pending |
+| Requirement | Phase | Plan | Status |
+|-------------|-------|------|--------|
+| FOUND-01 | Phase 1: Foundation & Canon System | 1.1 Directory Structure & State Initialization | Complete |
+| FOUND-02 | Phase 1: Foundation & Canon System | 1.1 Directory Structure & State Initialization | Complete |
+| FOUND-03 | Phase 1: Foundation & Canon System | 1.3 /novel:status Command & Git Integration | Complete |
+| FOUND-04 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-01 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-02 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-03 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-04 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-05 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CANON-06 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| AGENT-01 | Phase 2: Planning Pipeline | 2.1 Plot Planner Agent | Complete |
+| AGENT-02 | Phase 2: Planning Pipeline | 2.2 Beat Planner Agent | Complete |
+| AGENT-03 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
+| AGENT-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Pending |
+| AGENT-05 | Phase 5: Revision Loop | 5.1 Editor Agent | Pending |
+| AGENT-06 | Phase 5: Revision Loop | 5.2 Quality Gate Agent | Pending |
+| AGENT-07 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Pending |
+| AGENT-08 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Pending |
+| AGENT-09 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Pending |
+| AGENT-10 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Pending |
+| AGENT-11 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
+| CMD-01 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
+| CMD-02 | Phase 3: Drafting Engine | 3.3 /novel:write Command & Markdown Output | Pending |
+| CMD-03 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
+| CMD-04 | Phase 1: Foundation & Canon System | 1.3 /novel:status Command & Git Integration | Complete |
+| CMD-05 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
+| CMD-06 | Phase 6: Advanced Features | 6.3 /novel:publish Command | Pending |
+| DIARY-01 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
+| DIARY-02 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
+| DIARY-03 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
+| DIARY-04 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
+| VER-01 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
+| VER-02 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
+| VER-03 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
+| OUT-01 | Phase 3: Drafting Engine | 3.3 /novel:write Command & Markdown Output | Pending |
+| OUT-02 | Phase 6: Advanced Features | 6.2 EPUB Export | Pending |
 
 **Coverage:**
 - v1 requirements: 35 total
-- Mapped to phases: 35
+- Mapped to phases: 35 (100%)
 - Unmapped: 0
+- Phase distribution:
+  - Phase 1: 12 requirements (Foundation + Canon)
+  - Phase 2: 4 requirements (Planning)
+  - Phase 3: 8 requirements (Drafting + Diary + Output)
+  - Phase 4: 6 requirements (Quality Checks)
+  - Phase 5: 2 requirements (Revision)
+  - Phase 6: 5 requirements (Advanced Features)
+
+**Validation:** ✓ All v1 requirements mapped to exactly one phase and plan
 
 ---
 *Requirements defined: 2026-02-24*
-*Last updated: 2026-02-24 after initial definition*
+*Last updated: 2026-02-24 after Phase 2 completion*
+*Completed: 16/35 requirements (Phase 1: 12, Phase 2: 4)*

@@ -53,10 +53,10 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Plot Planner Agent (Save the Cat, 3-act/5-act structure)
-- [ ] 02-02-PLAN.md — Beat Planner Agent (scene-level beat generation)
-- [ ] 02-03-PLAN.md — Diary Planner Agent (temporal structure, seasonal arcs)
-- [ ] 02-04-PLAN.md — /novel:outline Command (orchestrate all agents, git commit)
+- [x] 02-01-PLAN.md — Plot Planner Agent (Save the Cat, 3-act/5-act structure)
+- [x] 02-02-PLAN.md — Beat Planner Agent (scene-level beat generation)
+- [x] 02-03-PLAN.md — Diary Planner Agent (temporal structure, seasonal arcs)
+- [x] 02-04-PLAN.md — /novel:outline Command (orchestrate all agents, git commit)
 
 ---
 
@@ -228,4 +228,6 @@ Plans:
 ---
 
 *Roadmap created: 2026-02-24*
-*Next step: Execute Phase 1*
+*Phase 1 completed: 2026-02-24*
+*Phase 2 completed: 2026-02-24*
+*Next step: Plan Phase 3*
