@@ -253,9 +253,20 @@ EOF
 **Purpose:** Detect and commit user edits to canon files.
 
 **When to Call:**
-- Before /novel:outline runs
-- Before /novel:write runs
-- When /novel:status runs (opportunistic)
+- Before /novel:outline runs (commit canon before generating structure)
+- Before /novel:write runs (commit canon before drafting)
+- When /novel:status runs (opportunistic commit)
+
+**Invocation Pattern:**
+
+Since there is no continuous daemon watching for file changes, canon change
+detection happens at command invocation points. Commands should call
+commit_canon_changes() at the start of their execution, before reading canon.
+
+This ensures:
+1. User edits are versioned before being used
+2. Clear git history showing canon evolution
+3. Ability to rollback if generated content is poor
 
 **Pattern:**
 
