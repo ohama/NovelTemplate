@@ -3,7 +3,7 @@
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
 **Current Phase:** 5 (Revision Loop) - IN PROGRESS
-**Current Plan:** 05-01 Complete, 05-02 Ready
+**Current Plan:** 05-02 Complete, 05-03 Ready
 
 ---
 
@@ -15,10 +15,10 @@
 
 **Progress:**
 - Phases completed: 4/6
-- Plans completed: 13/18
+- Plans completed: 14/18
 - Requirements completed: 29/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6)
 
-**Progress Bar:** [█████████████████░░░] 72%
+**Progress Bar:** [██████████████████░░] 78%
 
 ---
 
@@ -38,7 +38,7 @@
 | 2 | Planning Pipeline | COMPLETE | 4 | 3 | 100% |
 | 3 | Drafting Engine | COMPLETE | 7 | 2 | 100% |
 | 4 | Quality Checks | COMPLETE | 6 | 3 | 100% |
-| 5 | Revision Loop | IN PROGRESS | 2 | 3 | 33% |
+| 5 | Revision Loop | IN PROGRESS | 2 | 3 | 67% |
 | 6 | Advanced Features | Pending | 5 | 3 | 0% |
 
 ---
@@ -46,11 +46,11 @@
 ## Active Work
 
 **Current Phase:** 5 - Revision Loop (IN PROGRESS)
-**Current Plan:** 05-02 Ready
+**Current Plan:** 05-03 Ready
 **Active Tasks:** None
 
-**Completed:** 05-01 (editor/quality-gate agents)
-**Ready for:** 05-02 (pipeline integration)
+**Completed:** 05-01 (agents), 05-02 (pipeline integration)
+**Ready for:** 05-03 (verification)
 
 ---
 
@@ -58,18 +58,18 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 05-02: Pipeline Integration (/novel:check + revision tracking) |
 | 2026-02-24 | Completed Plan 05-01: Novel Editor & Quality Gate Agents |
 | 2026-02-24 | Phase 5 Planning Complete: 3 plans created (editor, quality-gate, pipeline, verification) |
 | 2026-02-24 | Completed Plan 04-03: Tension Monitor & /novel:check Command |
 | 2026-02-24 | Phase 4 Complete: Quality Checks (all 3 plans done) |
-| 2026-02-24 | Completed Plan 04-02: Voice & Pacing Analyzers |
 
 ---
 
 ## Next Steps
 
-1. Execute Plan 05-02: Pipeline Integration (update /novel:check to spawn editor/quality-gate)
-2. Execute Plan 05-03: Verification (test revision loop end-to-end)
+1. Execute Plan 05-03: Verification (test revision loop end-to-end)
+2. Complete Phase 5: Revision Loop
 3. Plan Phase 6: Advanced Features (5 requirements, 3 plans estimated)
 4. Execute Phase 6 plans (version management, EPUB export, publish command)
 
@@ -132,6 +132,10 @@
 | 2026-02-24 | Scene-level evaluation in quality gate | Enables targeted revision instead of rejecting entire manuscript |
 | 2026-02-24 | Editorial letter includes What Works Well | Balanced feedback maintains writer motivation |
 | 2026-02-24 | Quality gate outputs structured JSON | Enables state updates by /novel:check command for revision tracking |
+| 2026-02-24 | Sequential editor/gate after parallel checkers | Editor needs all checker outputs, gate needs editor output |
+| 2026-02-24 | Editorial is advisory, not blocking | Quality gate continues even if editor fails |
+| 2026-02-24 | Revision history array per scene | Full audit trail enables tracking improvement across cycles |
+| 2026-02-24 | Schema version 1.1 for revision tracking | Enables migration detection for projects created with older schema |
 
 ---
 
@@ -161,8 +165,8 @@
 ## Session Continuity
 
 **Last session:** 2026-02-24
-**Stopped at:** Completed Plan 05-01
-**Resume file:** None - ready for Plan 05-02 execution
+**Stopped at:** Completed Plan 05-02
+**Resume file:** None - ready for Plan 05-03 execution
 
 ---
 
@@ -212,9 +216,11 @@
 |----------|----------|--------|
 | novel-editor Agent | claude_src/novel/agents/novel-editor.md | Complete |
 | novel-quality-gate Agent | claude_src/novel/agents/novel-quality-gate.md | Complete |
-| /novel:check Pipeline Update | claude_src/novel/commands/check.md | Pending (05-02) |
+| /novel:check Pipeline Update | claude_src/novel/commands/check.md | Complete |
+| story_state.schema.json v1.1 | claude_src/novel/schemas/story_state.schema.json | Complete |
+| Revision Tracking Docs | claude_src/novel/utils/state-manager.md | Complete |
 
 ---
 
 *State updated: 2026-02-24*
-*Plan 05-01 complete - ready for Plan 05-02 execution*
+*Plan 05-02 complete - ready for Plan 05-03 execution*
