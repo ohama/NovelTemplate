@@ -30,8 +30,8 @@
 ### Drafting Agents
 
 - [x] **AGENT-04**: novel-scene-writer 에이전트 (스펙에서 산문 작성)
-- [ ] **AGENT-05**: novel-editor 에이전트 (이슈 기반 리라이트)
-- [ ] **AGENT-06**: novel-quality-gate 에이전트 (승인/반려 결정)
+- [x] **AGENT-05**: novel-editor 에이전트 (이슈 기반 리라이트)
+- [x] **AGENT-06**: novel-quality-gate 에이전트 (승인/반려 결정)
 
 ### Checking Agents
 
@@ -111,8 +111,8 @@
 | AGENT-02 | Phase 2: Planning Pipeline | 2.2 Beat Planner Agent | Complete |
 | AGENT-03 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
 | AGENT-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
-| AGENT-05 | Phase 5: Revision Loop | 5.1 Editor Agent | Pending |
-| AGENT-06 | Phase 5: Revision Loop | 5.2 Quality Gate Agent | Pending |
+| AGENT-05 | Phase 5: Revision Loop | 5.1 Editor Agent | Complete |
+| AGENT-06 | Phase 5: Revision Loop | 5.2 Quality Gate Agent | Complete |
 | AGENT-07 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Complete |
 | AGENT-08 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Complete |
 | AGENT-09 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Complete |
@@ -150,5 +150,5 @@
 
 ---
 *Requirements defined: 2026-02-24*
-*Last updated: 2026-02-24 after Phase 4 completion*
-*Completed: 29/35 requirements (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6)*
+*Last updated: 2026-02-24 after Phase 5 completion*
+*Completed: 31/35 requirements (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6, Phase 5: 2)*

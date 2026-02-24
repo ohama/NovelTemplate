@@ -114,15 +114,15 @@ Plans:
 - User receives editor feedback listing 3-5 improvement areas per scene
 - Quality gate approves/rejects scenes based on checker results
 - User can see revision history tracking which issues were addressed
-- Rejected scenes trigger automatic rewrite with editor notes
+- Rejected scenes display actionable editorial feedback; user reruns /novel:write to revise
 - Approved scenes are marked as "final" in state files
 
 **Plans:** 3 plans
 
 Plans:
-- [ ] 05-01-PLAN.md — Editorial & Quality Gate Agents (novel-editor, novel-quality-gate)
-- [ ] 05-02-PLAN.md — Pipeline Integration & State Tracking (extend /novel:check, revision_history schema)
-- [ ] 05-03-PLAN.md — Verification & Testing (end-to-end revision loop validation)
+- [x] 05-01-PLAN.md — Editorial & Quality Gate Agents (novel-editor, novel-quality-gate)
+- [x] 05-02-PLAN.md — Pipeline Integration & State Tracking (extend /novel:check, revision_history schema)
+- [x] 05-03-PLAN.md — Verification & Testing (end-to-end revision loop validation)
 
 ---
 
@@ -196,4 +196,5 @@ Plans:
 *Phase 2 completed: 2026-02-24*
 *Phase 3 completed: 2026-02-24*
 *Phase 4 completed: 2026-02-24*
-*Next step: Execute Phase 5*
+*Phase 5 completed: 2026-02-24*
+*Next step: Plan Phase 6*
