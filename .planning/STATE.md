@@ -2,23 +2,23 @@
 
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
-**Current Phase:** 5 (Revision Loop) - COMPLETE
-**Current Plan:** Phase 5 Complete, Phase 6 Ready
+**Current Phase:** 6 (Advanced Features) - IN PROGRESS
+**Current Plan:** 06-02 Complete, 06-03 Ready
 
 ---
 
 ## Project Status
 
-**Phase:** Phase 5 - Revision Loop (COMPLETE)
+**Phase:** Phase 6 - Advanced Features (IN PROGRESS)
 **Mode:** yolo
 **Parallelization:** enabled
 
 **Progress:**
 - Phases completed: 5/6
-- Plans completed: 15/18
-- Requirements completed: 31/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6, Phase 5: 2)
+- Plans completed: 17/18
+- Requirements completed: 33/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6, Phase 5: 2, Phase 6: 2)
 
-**Progress Bar:** [████████████████████] 83%
+**Progress Bar:** [██████████████████░░] 94%
 
 ---
 
@@ -39,18 +39,18 @@
 | 3 | Drafting Engine | COMPLETE | 7 | 2 | 100% |
 | 4 | Quality Checks | COMPLETE | 6 | 3 | 100% |
 | 5 | Revision Loop | COMPLETE | 2 | 3 | 100% |
-| 6 | Advanced Features | Pending | 5 | 3 | 0% |
+| 6 | Advanced Features | IN PROGRESS | 5 | 3 | 67% |
 
 ---
 
 ## Active Work
 
-**Current Phase:** 6 - Advanced Features (PENDING)
-**Current Plan:** Phase 6 planning needed
+**Current Phase:** 6 - Advanced Features (IN PROGRESS)
+**Current Plan:** 06-02 Complete, 06-03 Ready
 **Active Tasks:** None
 
-**Completed:** Phase 5 complete (05-01 agents, 05-02 pipeline, 05-03 verification)
-**Ready for:** Phase 6 planning and execution
+**Completed:** Plans 06-01 (version-manager) and 06-02 (EPUB export)
+**Ready for:** Execute Plan 06-03 (/novel:publish command)
 
 ---
 
@@ -58,6 +58,9 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 06-02: EPUB Export (epub-generator skill, templates) |
+| 2026-02-24 | Completed Plan 06-01: Version Management (version-manager skill, schema updates) |
+| 2026-02-24 | Phase 6 Planning Complete: 3 plans in 2 waves (version mgmt, EPUB, publish) |
 | 2026-02-24 | Phase 5 COMPLETE: Revision Loop (all 3 plans done) |
 | 2026-02-24 | Completed Plan 05-03: Verification and Testing (human verification approved) |
 | 2026-02-24 | Completed Plan 05-02: Pipeline Integration (/novel:check + revision tracking) |
@@ -70,9 +73,8 @@
 
 ## Next Steps
 
-1. Plan Phase 6: Advanced Features (5 requirements, 3 plans estimated)
-2. Execute Phase 6 plans (version management, EPUB export, /novel:publish command)
-3. Complete v1.0 milestone
+1. Execute Plan 06-03: /novel:publish command
+2. Complete v1.0 milestone (1 plan remaining)
 
 ---
 
@@ -137,6 +139,10 @@
 | 2026-02-24 | Editorial is advisory, not blocking | Quality gate continues even if editor fails |
 | 2026-02-24 | Revision history array per scene | Full audit trail enables tracking improvement across cycles |
 | 2026-02-24 | Schema version 1.1 for revision tracking | Enables migration detection for projects created with older schema |
+| 2026-02-24 | Pandoc for EPUB generation | Industry standard, cross-platform, supports YAML metadata natively |
+| 2026-02-24 | Scene ordering from scene_index | Single source of truth for reading order, consistent with quality checks |
+| 2026-02-24 | Korean text optimization via :lang(ko) CSS | Korean requires word-break: keep-all for proper line wrapping |
+| 2026-02-24 | Optional epubcheck validation | Graceful degradation - shouldn't block generation if not installed |
 
 ---
 
@@ -166,8 +172,8 @@
 ## Session Continuity
 
 **Last session:** 2026-02-24
-**Stopped at:** Completed Phase 5 (all 3 plans done)
-**Resume file:** None - ready for Phase 6 planning
+**Stopped at:** Completed Plan 06-02 (EPUB Export)
+**Resume file:** None - ready for Plan 06-03
 
 ---
 
@@ -221,7 +227,18 @@
 | story_state.schema.json v1.1 | claude_src/novel/schemas/story_state.schema.json |
 | Revision Tracking Docs | claude_src/novel/utils/state-manager.md |
 
+## Phase 6 Artifacts Summary (In Progress)
+
+| Artifact | Location |
+|----------|----------|
+| version-manager Skill | claude_src/novel/skills/version-manager.md |
+| story_state.schema.json v1.2 | claude_src/novel/schemas/story_state.schema.json |
+| epub-generator Skill | claude_src/novel/skills/epub-generator.md |
+| EPUB Metadata Template | claude_src/novel/templates/epub/metadata.yaml |
+| EPUB CSS Template | claude_src/novel/templates/epub/epub.css |
+| Compiled Directory README | claude_src/novel/templates/directories/draft/compiled/README.md |
+
 ---
 
 *State updated: 2026-02-24*
-*Phase 5 complete - ready for Phase 6 planning*
+*Plan 06-02 complete - ready for Plan 06-03*
