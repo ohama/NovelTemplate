@@ -2,23 +2,23 @@
 
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
-**Current Phase:** 2 (Planning Pipeline) - COMPLETE
-**Current Plan:** 02-04 Complete
+**Current Phase:** 3 (Drafting Engine) - IN PROGRESS
+**Current Plan:** 03-01 Complete
 
 ---
 
 ## Project Status
 
-**Phase:** Phase 2 - Planning Pipeline (COMPLETE)
+**Phase:** Phase 3 - Drafting Engine (IN PROGRESS)
 **Mode:** yolo
 **Parallelization:** enabled
 
 **Progress:**
 - Phases completed: 2/6
-- Plans completed: 6/18
-- Requirements completed: ~16/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent, beat-planner agent, diary-planner agent, outline command)
+- Plans completed: 7/18
+- Requirements completed: ~17/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent, beat-planner agent, diary-planner agent, outline command, scene-writer agent)
 
-**Progress Bar:** [=============-------] 33%
+**Progress Bar:** [==============------] 39%
 
 ---
 
@@ -36,7 +36,7 @@
 |-------|------|--------|--------------|-------|------------|
 | 1 | Foundation & Canon System | COMPLETE | 12 | 3 | 100% |
 | 2 | Planning Pipeline | COMPLETE | 4 | 3 | 100% |
-| 3 | Drafting Engine | Pending | 8 | 3 | 0% |
+| 3 | Drafting Engine | IN PROGRESS | 8 | 3 | 33% |
 | 4 | Quality Checks | Pending | 6 | 3 | 0% |
 | 5 | Revision Loop | Pending | 2 | 3 | 0% |
 | 6 | Advanced Features | Pending | 5 | 3 | 0% |
@@ -45,11 +45,11 @@
 
 ## Active Work
 
-**Current Phase:** 2 - Planning Pipeline (COMPLETE)
-**Current Plan:** 02-04 Complete
+**Current Phase:** 3 - Drafting Engine (IN PROGRESS)
+**Current Plan:** 03-01 Complete
 **Active Tasks:** None
 
-**Ready for:** Phase 3 - Drafting Engine
+**Ready for:** Plan 03-02 (/novel:write Command)
 
 ---
 
@@ -57,19 +57,19 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 03-01: Scene Writer Agent |
 | 2026-02-24 | Completed Plan 02-04: /novel:outline Orchestrator Command |
 | 2026-02-24 | Completed Plan 02-03: Diary Planner Agent |
 | 2026-02-24 | Completed Plan 02-02: Beat Planner Agent |
-| 2026-02-24 | Completed Plan 02-01: Plot Planner Agent |
 
 ---
 
 ## Next Steps
 
-1. Begin Phase 3: Drafting Engine
-2. Build /novel:write command
-3. Create scene-writer agent
-4. Implement scene-by-scene drafting workflow
+1. Build /novel:write command orchestrator
+2. Create scene rendering pipeline for chapter compilation
+3. Build quality checker agents (continuity, voice, pace, emotion, consistency)
+4. Implement revision loop system
 
 ---
 
@@ -103,6 +103,12 @@
 | 2026-02-24 | Backup beats/ before regeneration | Prevents data loss if user accidentally regenerates - restore from beats.backup.[timestamp] |
 | 2026-02-24 | Conditional diary-planner invocation | Only runs when format == "diary" - chapter format doesn't need diary-specific planning |
 | 2026-02-24 | Comprehensive validation in /novel:outline | Guides user through issues with actionable error messages rather than cryptic failures |
+| 2026-02-24 | Single agent for both diary and standard formats | Conditional logic within scene-writer simpler than separate agents - diary is variation not different system |
+| 2026-02-24 | Always read previous scene for continuity | Context continuity critical for prose flow - previous scene provides emotional state and narrative momentum |
+| 2026-02-24 | Word count as guidance not limit | Target word counts guide pacing but quality over constraints - 300-3000 word range allows flexibility |
+| 2026-02-24 | State update after file write | Writing file first prevents desync - if state update fails, file still exists (atomic operation) |
+| 2026-02-24 | Beat structure as invisible scaffolding | Beat sheet specifies WHAT happens not HOW - avoid mechanical prose following beat sections literally |
+| 2026-02-24 | Diary format uses retrospective voice | First-person past tense with narrator awareness creates authentic diary tone - present tense feels artificial |
 
 ---
 
@@ -131,9 +137,9 @@
 
 ## Session Continuity
 
-**Last session:** 2026-02-24 05:40 UTC
-**Stopped at:** Completed Plan 02-04 (/novel:outline Command) - Phase 2 Complete
-**Resume file:** .planning/phases/03-drafting-engine/03-01-PLAN.md
+**Last session:** 2026-02-24 06:07 UTC
+**Stopped at:** Completed Plan 03-01 (Scene Writer Agent) - Phase 3 Started
+**Resume file:** .planning/phases/03-drafting-engine/03-02-PLAN.md
 
 ---
 
@@ -159,7 +165,15 @@
 | diary-planner Agent | claude_src/novel/agents/diary-planner.md |
 | /novel:outline Command | claude_src/novel/commands/outline.md |
 
+## Phase 3 Artifacts Summary (In Progress)
+
+| Artifact | Location | Status |
+|----------|----------|--------|
+| scene-writer Agent | claude_src/novel/agents/scene-writer.md | COMPLETE |
+| /novel:write Command | claude_src/novel/commands/write.md | Pending |
+| Scene Rendering Pipeline | claude_src/novel/utils/scene-renderer.md | Pending |
+
 ---
 
 *State updated: 2026-02-24*
-*Phase 2 complete, ready for Phase 3*
+*Phase 3 in progress - scene-writer agent complete*
