@@ -90,7 +90,7 @@ Snapshots are created automatically or manually:
 For snapshot operations, see the **version-manager** skill:
 
 ```
-claude_src/novel/skills/version-manager.md
+.claude/novel/skills/version-manager.md
 ```
 
 **Common operations:**
