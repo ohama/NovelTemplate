@@ -8,9 +8,9 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "description": "Schema version for migration support (1.1 adds revision tracking)",
+      "description": "Schema version for migration support (1.1 adds revision tracking, 1.2 adds version management)",
       "pattern": "^\\d+\\.\\d+$",
-      "const": "1.1"
+      "const": "1.2"
     },
     "project": {
       "type": "object",
@@ -343,6 +343,75 @@
             }
           }
         }
+      }
+    },
+    "versions": {
+      "type": "object",
+      "description": "Version management for draft snapshots",
+      "properties": {
+        "snapshots": {
+          "type": "array",
+          "description": "Array of snapshot summaries",
+          "items": {
+            "type": "object",
+            "required": ["snapshot_id", "timestamp", "trigger", "scenes_count"],
+            "properties": {
+              "snapshot_id": {
+                "type": "string",
+                "description": "Unique snapshot identifier",
+                "pattern": "^snap_\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}$"
+              },
+              "timestamp": {
+                "type": "string",
+                "description": "When snapshot was created (ISO 8601)",
+                "format": "date-time"
+              },
+              "trigger": {
+                "type": "string",
+                "description": "What triggered this snapshot",
+                "enum": ["revision_cycle", "manual", "pre_publish"]
+              },
+              "scenes_count": {
+                "type": "integer",
+                "description": "Number of scenes in snapshot",
+                "minimum": 0
+              }
+            }
+          },
+          "default": []
+        },
+        "last_snapshot": {
+          "type": "string",
+          "description": "Most recent snapshot ID",
+          "default": ""
+        },
+        "last_rollback": {
+          "type": ["object", "null"],
+          "description": "Details of most recent rollback operation",
+          "properties": {
+            "snapshot_id": {
+              "type": "string",
+              "description": "Snapshot that was restored from"
+            },
+            "timestamp": {
+              "type": "string",
+              "description": "When rollback occurred (ISO 8601)",
+              "format": "date-time"
+            },
+            "scenes_restored": {
+              "type": "array",
+              "description": "Scene IDs that were restored",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "default": {
+        "snapshots": [],
+        "last_snapshot": "",
+        "last_rollback": null
       }
     }
   }

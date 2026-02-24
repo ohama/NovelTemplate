@@ -502,5 +502,136 @@ Two additional timestamp fields track check and approval times:
 
 ---
 
+## Version Tracking
+
+The `versions` object tracks draft snapshots for recovery and comparison. This integrates with the version-manager skill (see `claude_src/novel/skills/version-manager.md`).
+
+### Versions Object Structure
+
+```json
+{
+  "versions": {
+    "snapshots": [
+      {
+        "snapshot_id": "snap_2026-02-24_14-30-00",
+        "timestamp": "2026-02-24T14:30:00Z",
+        "trigger": "revision_cycle",
+        "scenes_count": 12
+      }
+    ],
+    "last_snapshot": "snap_2026-02-24_14-30-00",
+    "last_rollback": null
+  }
+}
+```
+
+### Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `snapshots` | array | List of snapshot summaries (full data in manifest.json) |
+| `last_snapshot` | string | ID of most recently created snapshot |
+| `last_rollback` | object/null | Details of last rollback operation |
+
+### Adding a New Snapshot Entry
+
+```markdown
+1. Load story_state.json
+2. Create snapshot entry:
+   {
+     "snapshot_id": "snap_YYYY-MM-DD_HH-MM-SS",
+     "timestamp": "ISO 8601 timestamp",
+     "trigger": "revision_cycle" | "manual" | "pre_publish",
+     "scenes_count": number of scenes
+   }
+3. Append to versions.snapshots array
+4. Set versions.last_snapshot to snapshot_id
+5. Save story_state.json
+```
+
+### Recording a Rollback Event
+
+```markdown
+1. Load story_state.json
+2. Set versions.last_rollback:
+   {
+     "snapshot_id": "snap_YYYY-MM-DD_HH-MM-SS",
+     "timestamp": "ISO 8601 now",
+     "scenes_restored": ["ch01_s01", "ch01_s02", ...]
+   }
+3. Save story_state.json
+```
+
+### Example: Full Versions Object
+
+```json
+{
+  "versions": {
+    "snapshots": [
+      {
+        "snapshot_id": "snap_2026-02-20_10-00-00",
+        "timestamp": "2026-02-20T10:00:00Z",
+        "trigger": "manual",
+        "scenes_count": 5
+      },
+      {
+        "snapshot_id": "snap_2026-02-22_15-30-00",
+        "timestamp": "2026-02-22T15:30:00Z",
+        "trigger": "revision_cycle",
+        "scenes_count": 10
+      },
+      {
+        "snapshot_id": "snap_2026-02-24_14-30-00",
+        "timestamp": "2026-02-24T14:30:00Z",
+        "trigger": "pre_publish",
+        "scenes_count": 12
+      }
+    ],
+    "last_snapshot": "snap_2026-02-24_14-30-00",
+    "last_rollback": {
+      "snapshot_id": "snap_2026-02-22_15-30-00",
+      "timestamp": "2026-02-24T09:00:00Z",
+      "scenes_restored": ["ch03_s02"]
+    }
+  }
+}
+```
+
+### Accessing Version Data
+
+**Get list of snapshots:**
+```markdown
+1. Load story_state.json
+2. Read versions.snapshots array
+3. Sort by timestamp (newest first) if needed
+```
+
+**Check if snapshot exists:**
+```markdown
+1. Load story_state.json
+2. Search versions.snapshots for matching snapshot_id
+3. Return true if found
+```
+
+**Get last snapshot details:**
+```markdown
+1. Load story_state.json
+2. Read versions.last_snapshot to get ID
+3. Find matching entry in versions.snapshots for metadata
+4. For full details, read manifest.json in draft/versions/{id}/
+```
+
+**Check for recent rollback:**
+```markdown
+1. Load story_state.json
+2. If versions.last_rollback is not null:
+   - Read scenes_restored to see what was affected
+   - Check timestamp to see how recent
+```
+
+For full snapshot operations (create, compare, rollback), see the **version-manager** skill.
+
+---
+
 *State Manager Skill v1.0*
 *For use with Novel Engine state management*
