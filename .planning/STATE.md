@@ -2,23 +2,23 @@
 
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
-**Current Phase:** 3 (Drafting Engine) - COMPLETE
-**Current Plan:** 03-02 Complete
+**Current Phase:** 4 (Quality Checks) - IN PROGRESS
+**Current Plan:** 04-02 Complete
 
 ---
 
 ## Project Status
 
-**Phase:** Phase 3 - Drafting Engine (COMPLETE)
+**Phase:** Phase 4 - Quality Checks (IN PROGRESS)
 **Mode:** yolo
 **Parallelization:** enabled
 
 **Progress:**
 - Phases completed: 3/6
-- Plans completed: 9/18
-- Requirements completed: 23/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7)
+- Plans completed: 11/18
+- Requirements completed: 27/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 4)
 
-**Progress Bar:** [================----] 50%
+**Progress Bar:** [==================--] 61%
 
 ---
 
@@ -37,7 +37,7 @@
 | 1 | Foundation & Canon System | COMPLETE | 12 | 3 | 100% |
 | 2 | Planning Pipeline | COMPLETE | 4 | 3 | 100% |
 | 3 | Drafting Engine | COMPLETE | 7 | 2 | 100% |
-| 4 | Quality Checks | Pending | 6 | 3 | 0% |
+| 4 | Quality Checks | IN PROGRESS | 6 | 3 | 67% |
 | 5 | Revision Loop | Pending | 2 | 3 | 0% |
 | 6 | Advanced Features | Pending | 5 | 3 | 0% |
 
@@ -45,11 +45,11 @@
 
 ## Active Work
 
-**Current Phase:** 3 - Drafting Engine (COMPLETE)
-**Current Plan:** All plans complete
+**Current Phase:** 4 - Quality Checks (IN PROGRESS)
+**Current Plan:** 04-02 Complete
 **Active Tasks:** None
 
-**Ready for:** Phase 4 - Quality Checks
+**Ready for:** Execute Plan 04-03 (Tension Monitor & /novel:check Command)
 
 ---
 
@@ -57,19 +57,19 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 04-02: Voice & Pacing Analyzers |
+| 2026-02-24 | Completed Plan 04-01: Canon & Timeline Checkers |
+| 2026-02-24 | Planned Phase 4: Quality Checks (3 plans created) |
 | 2026-02-24 | Completed Plan 03-02: /novel:write Command |
-| 2026-02-24 | Completed Plan 03-01: Scene Writer Agent |
-| 2026-02-24 | Completed Plan 02-04: /novel:outline Orchestrator Command |
-| 2026-02-24 | Completed Plan 02-03: Diary Planner Agent |
 
 ---
 
 ## Next Steps
 
-1. Begin Phase 4: Quality Checks
-2. Build quality checker agents (canon, timeline, voice, pacing, tension)
-3. Create /novel:check command
-4. Implement parallel checker execution
+1. Execute Plan 04-03: Tension Monitor & /novel:check Command (Wave 2)
+2. Human verification checkpoint for quality review
+3. Plan Phase 5: Revision Loop
+4. Execute Phase 5 plans
 
 ---
 
@@ -112,6 +112,12 @@
 | 2026-02-24 | Sequential execution flow in /novel:write | validate -> load -> spawn -> verify -> commit -> report ensures data consistency across drafting workflow |
 | 2026-02-24 | Agent owns state writes, command only reads | Clear separation of concerns - command orchestrates, agent mutates - prevents double-writes and conflicts |
 | 2026-02-24 | Continuation prompt encourages iterative drafting | User sees "Continue to next scene? Type /novel:write" after each scene - reduces friction for multi-scene sessions |
+| 2026-02-24 | Three-tier severity system for quality issues | CRITICAL (blocking), MAJOR (should fix), MINOR (nice to fix) enables prioritization without overwhelm |
+| 2026-02-24 | Character knowledge timeline for canon checking | Tracks when characters learn information to detect premature knowledge violations |
+| 2026-02-24 | Day-of-week validation for diary format | Timeline keeper validates date matches day-of-week using calendar calculation (flags as MINOR) |
+| 2026-02-24 | Flashback exemption from timeline reversals | Scenes marked as flashback/memory get different chronology rules to prevent false positives |
+| 2026-02-24 | Evidence structure for quality issues | All issues include expected (from canon), found (from scene), source (file reference) for verification |
+| 2026-02-24 | Actionable fix suggestions in quality reports | Suggestions specify exact changes ("Change 'blonde' to 'brown'") not vague instructions |
 
 ---
 
@@ -140,9 +146,9 @@
 
 ## Session Continuity
 
-**Last session:** 2026-02-24 06:15 UTC
-**Stopped at:** Completed Plan 03-02 (/novel:write Command)
-**Resume file:** .planning/phases/03-drafting-engine/03-03-PLAN.md
+**Last session:** 2026-02-24
+**Stopped at:** Phase 4 planning complete
+**Resume file:** .planning/phases/04-quality-checks/04-01-PLAN.md
 
 ---
 
@@ -175,7 +181,16 @@
 | scene-writer Agent | claude_src/novel/agents/scene-writer.md |
 | /novel:write Command | claude_src/novel/commands/write.md |
 
+## Phase 4 Artifacts Summary (In Progress)
+
+| Artifact | Location |
+|----------|----------|
+| canon-checker Agent | claude_src/novel/agents/canon-checker.md |
+| timeline-keeper Agent | claude_src/novel/agents/timeline-keeper.md |
+| voice-coach Agent | claude_src/novel/agents/voice-coach.md |
+| pacing-analyzer Agent | claude_src/novel/agents/pacing-analyzer.md |
+
 ---
 
 *State updated: 2026-02-24*
-*Phase 3 complete, ready for Phase 4*
+*Phase 4 in progress - Plans 04-01 and 04-02 complete*
