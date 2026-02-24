@@ -76,8 +76,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Scene Writer Agent (prose generation, diary format, Markdown output)
-- [ ] 03-02-PLAN.md — /novel:write Command (orchestrate scene-writer, git commit, verification)
+- [x] 03-01-PLAN.md — Scene Writer Agent (prose generation, diary format, Markdown output)
+- [x] 03-02-PLAN.md — /novel:write Command (orchestrate scene-writer, git commit, verification)
 
 ---
 
@@ -216,5 +216,5 @@ Plans:
 *Roadmap created: 2026-02-24*
 *Phase 1 completed: 2026-02-24*
 *Phase 2 completed: 2026-02-24*
-*Phase 3 planned: 2026-02-24*
-*Next step: Execute Phase 3*
+*Phase 3 completed: 2026-02-24*
+*Next step: Plan Phase 4*

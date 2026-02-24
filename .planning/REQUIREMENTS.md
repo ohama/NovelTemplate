@@ -29,7 +29,7 @@
 
 ### Drafting Agents
 
-- [ ] **AGENT-04**: novel-scene-writer 에이전트 (스펙에서 산문 작성)
+- [x] **AGENT-04**: novel-scene-writer 에이전트 (스펙에서 산문 작성)
 - [ ] **AGENT-05**: novel-editor 에이전트 (이슈 기반 리라이트)
 - [ ] **AGENT-06**: novel-quality-gate 에이전트 (승인/반려 결정)
 
@@ -44,7 +44,7 @@
 ### Commands
 
 - [x] **CMD-01**: /novel:init 스킬 (프로젝트 초기화)
-- [ ] **CMD-02**: /novel:write 스킬 (다음 씬/일기 작성)
+- [x] **CMD-02**: /novel:write 스킬 (다음 씬/일기 작성)
 - [ ] **CMD-03**: /novel:check 스킬 (일관성 검사)
 - [x] **CMD-04**: /novel:status 스킬 (진행 상황 확인)
 - [x] **CMD-05**: /novel:outline 스킬 (아웃라인 생성)
@@ -52,10 +52,10 @@
 
 ### Diary Format Support
 
-- [ ] **DIARY-01**: 일기 날짜/시간 추적 (ISO 8601 형식)
-- [ ] **DIARY-02**: 계절/날씨 변화 추적 (자연 묘사 가이드)
-- [ ] **DIARY-03**: 감정 아크 추적 (일기별 감정 상태)
-- [ ] **DIARY-04**: 성장 마일스톤 추적 (달리기 기록, 체력 변화 등)
+- [x] **DIARY-01**: 일기 날짜/시간 추적 (ISO 8601 형식)
+- [x] **DIARY-02**: 계절/날씨 변화 추적 (자연 묘사 가이드)
+- [x] **DIARY-03**: 감정 아크 추적 (일기별 감정 상태)
+- [x] **DIARY-04**: 성장 마일스톤 추적 (달리기 기록, 체력 변화 등)
 
 ### Version Management
 
@@ -65,7 +65,7 @@
 
 ### Output
 
-- [ ] **OUT-01**: Markdown 출력 (씬별, 챕터별)
+- [x] **OUT-01**: Markdown 출력 (씬별, 챕터별)
 - [ ] **OUT-02**: EPUB 내보내기 (Pandoc 통합)
 
 ## v2 Requirements
@@ -110,7 +110,7 @@
 | AGENT-01 | Phase 2: Planning Pipeline | 2.1 Plot Planner Agent | Complete |
 | AGENT-02 | Phase 2: Planning Pipeline | 2.2 Beat Planner Agent | Complete |
 | AGENT-03 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
-| AGENT-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Pending |
+| AGENT-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
 | AGENT-05 | Phase 5: Revision Loop | 5.1 Editor Agent | Pending |
 | AGENT-06 | Phase 5: Revision Loop | 5.2 Quality Gate Agent | Pending |
 | AGENT-07 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Pending |
@@ -119,19 +119,19 @@
 | AGENT-10 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Pending |
 | AGENT-11 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
 | CMD-01 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
-| CMD-02 | Phase 3: Drafting Engine | 3.3 /novel:write Command & Markdown Output | Pending |
+| CMD-02 | Phase 3: Drafting Engine | 3.2 /novel:write Command | Complete |
 | CMD-03 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
 | CMD-04 | Phase 1: Foundation & Canon System | 1.3 /novel:status Command & Git Integration | Complete |
 | CMD-05 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
 | CMD-06 | Phase 6: Advanced Features | 6.3 /novel:publish Command | Pending |
-| DIARY-01 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
-| DIARY-02 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
-| DIARY-03 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
-| DIARY-04 | Phase 3: Drafting Engine | 3.2 Diary Format Features | Pending |
+| DIARY-01 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
+| DIARY-02 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
+| DIARY-03 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
+| DIARY-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
 | VER-01 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
 | VER-02 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
 | VER-03 | Phase 6: Advanced Features | 6.1 Version Management | Pending |
-| OUT-01 | Phase 3: Drafting Engine | 3.3 /novel:write Command & Markdown Output | Pending |
+| OUT-01 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
 | OUT-02 | Phase 6: Advanced Features | 6.2 EPUB Export | Pending |
 
 **Coverage:**
@@ -150,5 +150,5 @@
 
 ---
 *Requirements defined: 2026-02-24*
-*Last updated: 2026-02-24 after Phase 2 completion*
-*Completed: 16/35 requirements (Phase 1: 12, Phase 2: 4)*
+*Last updated: 2026-02-24 after Phase 3 completion*
+*Completed: 23/35 requirements (Phase 1: 12, Phase 2: 4, Phase 3: 7)*
