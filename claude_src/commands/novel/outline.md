@@ -96,7 +96,7 @@ Before starting the planning pipeline, verify all prerequisites are met.
      The canon/premise.md file is required to generate an outline.
 
      Create this file by:
-       1. Copy template: cp claude_src/novel/templates/premise.md canon/
+       1. Copy template: cp .claude/novel/templates/premise.md canon/
        2. Edit the file to define your story concept
        3. Run /novel:outline again
 
@@ -110,7 +110,7 @@ Before starting the planning pipeline, verify all prerequisites are met.
      The canon/characters.md file is required to generate an outline.
 
      Create this file by:
-       1. Copy template: cp claude_src/novel/templates/characters.md canon/
+       1. Copy template: cp .claude/novel/templates/characters.md canon/
        2. Edit the file to define your characters
        3. Run /novel:outline again
 
@@ -301,7 +301,7 @@ Create or prepare the beats/ directory for planning output.
 
 Launch the plot-planner agent to generate the high-level story structure.
 
-**Agent Reference:** claude_src/novel/agents/plot-planner.md
+**Agent Reference:** .claude/novel/agents/plot-planner.md
 
 ```markdown
 1. Display to user:
@@ -319,7 +319,7 @@ Launch the plot-planner agent to generate the high-level story structure.
 
 2. Spawn plot-planner agent:
 
-   Read and execute: claude_src/novel/agents/plot-planner.md
+   Read and execute: .claude/novel/agents/plot-planner.md
 
    The agent will:
    - Read canon files (premise.md, characters.md, world.md, timeline.md)
@@ -375,7 +375,7 @@ Launch the plot-planner agent to generate the high-level story structure.
 
 Launch the beat-planner agent to create detailed scene beat sheets.
 
-**Agent Reference:** claude_src/novel/agents/beat-planner.md
+**Agent Reference:** .claude/novel/agents/beat-planner.md
 
 ```markdown
 1. Display to user:
@@ -391,7 +391,7 @@ Launch the beat-planner agent to create detailed scene beat sheets.
 
 2. Spawn beat-planner agent:
 
-   Read and execute: claude_src/novel/agents/beat-planner.md
+   Read and execute: .claude/novel/agents/beat-planner.md
 
    The agent will:
    - Read beats/outline.md
@@ -455,7 +455,7 @@ Launch the beat-planner agent to create detailed scene beat sheets.
 
 If project format is "diary", launch the diary-planner agent.
 
-**Agent Reference:** claude_src/novel/agents/diary-planner.md
+**Agent Reference:** .claude/novel/agents/diary-planner.md
 
 ```markdown
 1. Check project format from story_state.json:
@@ -481,7 +481,7 @@ If project format is "diary", launch the diary-planner agent.
 
 3. Spawn diary-planner agent:
 
-   Read and execute: claude_src/novel/agents/diary-planner.md
+   Read and execute: .claude/novel/agents/diary-planner.md
 
    The agent will:
    - Read beats/outline.md and beats/scenes/*.md
@@ -716,13 +716,13 @@ ERROR: Missing required canon file: canon/[filename]
 Canon files are required to generate an outline.
 
 To create canon files:
-  1. Copy templates from claude_src/novel/templates/
+  1. Copy templates from .claude/novel/templates/
   2. Edit the files to define your story
   3. Run /novel:outline again
 
 Example:
-  cp claude_src/novel/templates/premise.md canon/
-  cp claude_src/novel/templates/characters.md canon/
+  cp .claude/novel/templates/premise.md canon/
+  cp .claude/novel/templates/characters.md canon/
   # Edit canon/premise.md and canon/characters.md
   /novel:outline
 ```
@@ -918,6 +918,6 @@ All validation checks should pass before reporting success.
 </validation>
 
 <skills_used>
-- state-manager: For loading and updating state files (claude_src/novel/utils/state-manager.md)
-- git-integration: For auto-committing canon and outline (claude_src/novel/skills/git-integration.md)
+- state-manager: For loading and updating state files (.claude/novel/utils/state-manager.md)
+- git-integration: For auto-committing canon and outline (.claude/novel/skills/git-integration.md)
 </skills_used>

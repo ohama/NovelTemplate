@@ -708,6 +708,6 @@ To enable git integration:
 </edge_cases>
 
 <skills_used>
-- state-manager: For loading and validating state files (claude_src/novel/utils/state-manager.md)
-- git-integration: For auto-committing canon changes (claude_src/novel/skills/git-integration.md)
+- state-manager: For loading and validating state files (.claude/novel/utils/state-manager.md)
+- git-integration: For auto-committing canon changes (.claude/novel/skills/git-integration.md)
 </skills_used>

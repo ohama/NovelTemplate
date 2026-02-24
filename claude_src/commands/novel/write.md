@@ -220,7 +220,7 @@ Before attempting to draft a scene, verify all prerequisites are met.
      Without it, the prose may lack consistent voice.
 
      Create this file:
-       cp claude_src/novel/templates/style_guide.md canon/
+       cp .claude/novel/templates/style_guide.md canon/
        # Edit the file to define POV, tense, voice characteristics
 
      Continue without style guide? [y/N]
@@ -236,7 +236,7 @@ Before attempting to draft a scene, verify all prerequisites are met.
      Without them, character voice may be generic.
 
      Create this file:
-       cp claude_src/novel/templates/characters.md canon/
+       cp .claude/novel/templates/characters.md canon/
        # Edit the file to define your characters
 
      Continue without character profiles? [y/N]
@@ -369,7 +369,7 @@ Gather all context needed for prose generation.
 
 Launch the scene-writer agent with complete context to generate prose.
 
-**Agent Reference:** claude_src/novel/agents/scene-writer.md
+**Agent Reference:** .claude/novel/agents/scene-writer.md
 
 ```markdown
 1. Display to user:
@@ -401,7 +401,7 @@ Launch the scene-writer agent with complete context to generate prose.
 
 3. Spawn scene-writer agent:
 
-   Read and execute: claude_src/novel/agents/scene-writer.md
+   Read and execute: .claude/novel/agents/scene-writer.md
 
    The agent will:
    - Validate input context
@@ -1138,7 +1138,7 @@ Next steps:
 </examples>
 
 <skills_used>
-- state-manager: For loading and updating state files (claude_src/novel/utils/state-manager.md)
-- git-integration: For auto-committing completed scenes (claude_src/novel/skills/git-integration.md)
-- scene-writer: Spawns the prose generation agent (claude_src/novel/agents/scene-writer.md)
+- state-manager: For loading and updating state files (.claude/novel/utils/state-manager.md)
+- git-integration: For auto-committing completed scenes (.claude/novel/skills/git-integration.md)
+- scene-writer: Spawns the prose generation agent (.claude/novel/agents/scene-writer.md)
 </skills_used>

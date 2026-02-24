@@ -306,7 +306,7 @@ Ensure EPUB metadata exists and is valid.
      Log: "Metadata file not found, generating from template..."
 
      a. Copy template:
-        Source: claude_src/novel/templates/epub/metadata.yaml
+        Source: .claude/novel/templates/epub/metadata.yaml
         Destination: draft/compiled/metadata.yaml
 
      b. Read canon/premise.md (if exists) to extract values:
@@ -384,7 +384,7 @@ Ensure EPUB metadata exists and is valid.
 
 Create a safety backup before publishing.
 
-**Skill Reference:** claude_src/novel/skills/version-manager.md
+**Skill Reference:** .claude/novel/skills/version-manager.md
 
 ### Snapshot 4.1: Check Skip Flag
 
@@ -488,13 +488,13 @@ Ensure epub.css is available for styling.
    If NOT found:
      Log: "CSS file not found, copying from template..."
 
-     Source: claude_src/novel/templates/epub/epub.css
+     Source: .claude/novel/templates/epub/epub.css
      Destination: draft/compiled/epub.css
 
      If template source NOT found:
        WARNING: EPUB CSS template not found.
 
-       Expected: claude_src/novel/templates/epub/epub.css
+       Expected: .claude/novel/templates/epub/epub.css
        Status: NOT FOUND
 
        The EPUB will be generated with Pandoc's default styling.
@@ -518,7 +518,7 @@ Ensure epub.css is available for styling.
 
 Build ordered list of scene files for Pandoc.
 
-**Skill Reference:** claude_src/novel/skills/epub-generator.md
+**Skill Reference:** .claude/novel/skills/epub-generator.md
 
 ### Compile 6.1: Sort Scenes by Reading Order
 
@@ -618,7 +618,7 @@ Skipped (file not found):
 
 Run Pandoc to create the EPUB file.
 
-**Skill Reference:** claude_src/novel/skills/epub-generator.md
+**Skill Reference:** .claude/novel/skills/epub-generator.md
 
 ### Generate 7.1: Build Pandoc Command
 
@@ -1509,9 +1509,9 @@ After installation, verify with:
 </examples>
 
 <skills_used>
-- epub-generator: For EPUB compilation patterns (claude_src/novel/skills/epub-generator.md)
-- version-manager: For pre-publish snapshot creation (claude_src/novel/skills/version-manager.md)
-- state-manager: For loading and updating state files (claude_src/novel/utils/state-manager.md)
+- epub-generator: For EPUB compilation patterns (.claude/novel/skills/epub-generator.md)
+- version-manager: For pre-publish snapshot creation (.claude/novel/skills/version-manager.md)
+- state-manager: For loading and updating state files (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 <notes>
@@ -1527,7 +1527,7 @@ The /novel:publish command follows a "safe by default" approach:
 **Integration Points:**
 
 - Depends on /novel:check for scene approval
-- Uses templates from claude_src/novel/templates/epub/
+- Uses templates from .claude/novel/templates/epub/
 - Creates versioned backups in draft/versions/
 - Updates story_state.json with publish history
 

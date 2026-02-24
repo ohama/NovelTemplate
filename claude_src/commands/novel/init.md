@@ -194,7 +194,7 @@ Create the four-layer directory structure for the novel project.
 
 Copy state files from schemas to the state/ directory.
 
-### Source Files (from claude_src/novel/schemas/):
+### Source Files (from .claude/novel/schemas/):
 
 - `story_state.default.json` -> `state/story_state.json`
 - `character_state.default.json` -> `state/character_state.json`
@@ -205,7 +205,7 @@ Copy state files from schemas to the state/ directory.
 
 ```markdown
 1. For each default state file:
-   a. Read the default file from claude_src/novel/schemas/
+   a. Read the default file from .claude/novel/schemas/
    b. Parse JSON to validate it
    c. Modify the story_state.json:
       - Set project.title to user-provided title
@@ -232,7 +232,7 @@ Copy state files from schemas to the state/ directory.
 
 Copy canon templates to the canon/ directory for user to fill out.
 
-### Source Files (from claude_src/novel/templates/):
+### Source Files (from .claude/novel/templates/):
 
 - `premise.md` -> `canon/premise.md`
 - `characters.md` -> `canon/characters.md`
@@ -245,14 +245,14 @@ Copy canon templates to the canon/ directory for user to fill out.
 
 ```markdown
 1. For each template file:
-   a. Read the template from claude_src/novel/templates/
+   a. Read the template from .claude/novel/templates/
    b. If format is diary, add diary-specific notes to timeline.md
    c. Write to canon/ directory
 
 2. Verify all canon files exist
 
 3. If any template is missing from source:
-   ERROR: Missing template file: claude_src/novel/templates/[filename]
+   ERROR: Missing template file: .claude/novel/templates/[filename]
 
    The Novel Engine installation may be incomplete.
    Please reinstall or contact support.
@@ -372,7 +372,7 @@ If user declines (N/n/no):
 
 Initialize git repository and create .gitignore.
 
-**Skill Reference:** Use patterns from `claude_src/novel/skills/git-integration.md`
+**Skill Reference:** Use patterns from `.claude/novel/skills/git-integration.md`
 
 ### Git Initialization:
 
@@ -786,20 +786,20 @@ Continuing anyway...
 
 ## Error: Missing Template Files
 
-**Trigger:** Source templates not found in claude_src/novel/templates/
+**Trigger:** Source templates not found in .claude/novel/templates/
 
 **Response:**
 ```
 ERROR: Missing template files.
 
-Expected: claude_src/novel/templates/premise.md
+Expected: .claude/novel/templates/premise.md
 Status: NOT FOUND
 
 The Novel Engine installation appears incomplete.
 
 Options:
   - Reinstall Novel Engine
-  - Check that claude_src/novel/templates/ exists
+  - Check that .claude/novel/templates/ exists
   - Contact support if problem persists
 ```
 
@@ -813,7 +813,7 @@ Options:
 ```
 ERROR: State file validation failed.
 
-File: claude_src/novel/schemas/story_state.default.json
+File: .claude/novel/schemas/story_state.default.json
 Issue: Invalid JSON syntax at line [X]
 
 This is an internal error in the Novel Engine.
@@ -825,6 +825,6 @@ No project files were created.
 </edge_cases>
 
 <skills_used>
-- state-manager: For loading default state files and validation patterns (claude_src/novel/utils/state-manager.md)
-- git-integration: For initial commit and git setup (claude_src/novel/skills/git-integration.md)
+- state-manager: For loading default state files and validation patterns (.claude/novel/utils/state-manager.md)
+- git-integration: For initial commit and git setup (.claude/novel/skills/git-integration.md)
 </skills_used>

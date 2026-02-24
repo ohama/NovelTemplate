@@ -29,14 +29,16 @@ You orchestrate the multi-agent quality verification pipeline, ensuring comprehe
 **What It Does:**
 
 1. Validates that draft scenes exist
-2. Spawns all five checkers in parallel:
+2. Spawns all seven checkers in parallel:
    - canon-checker: Fact consistency
    - timeline-keeper: Chronological integrity
    - voice-coach: POV/tense/style adherence
    - pacing-analyzer: Scene rhythm evaluation
    - tension-monitor: Conflict and stakes tracking
+   - plot-coherence-checker: Thread integrity and foreshadowing (NEW)
+   - story-quality-agent: Holistic narrative quality (NEW)
 3. Consolidates results from all checkers
-4. Generates unified quality report
+4. Generates unified quality report with revision guides
 5. Saves reports to check_reports/[timestamp]/
 6. Displays summary with critical issues highlighted
 
@@ -48,6 +50,8 @@ Run specific checker only by name:
 - `/novel:check voice` - Run voice-coach only
 - `/novel:check pacing` - Run pacing-analyzer only
 - `/novel:check tension` - Run tension-monitor only
+- `/novel:check plot` - Run plot-coherence-checker only (NEW)
+- `/novel:check story` - Run story-quality-agent only (NEW)
 
 **Requirements:**
 
@@ -223,11 +227,13 @@ They can run simultaneously without conflicts.
 
 Spawn configuration:
   checker_agents = [
-    "claude_src/novel/agents/canon-checker.md",
-    "claude_src/novel/agents/timeline-keeper.md",
-    "claude_src/novel/agents/voice-coach.md",
-    "claude_src/novel/agents/pacing-analyzer.md",
-    "claude_src/novel/agents/tension-monitor.md"
+    ".claude/novel/agents/canon-checker.md",
+    ".claude/novel/agents/timeline-keeper.md",
+    ".claude/novel/agents/voice-coach.md",
+    ".claude/novel/agents/pacing-analyzer.md",
+    ".claude/novel/agents/tension-monitor.md",
+    ".claude/novel/agents/plot-coherence-checker.md",
+    ".claude/novel/agents/story-quality-agent.md"
   ]
 
 Execute in parallel and collect results:
@@ -236,7 +242,9 @@ Execute in parallel and collect results:
     "timeline": [JSON output from timeline-keeper],
     "voice": [JSON output from voice-coach],
     "pacing": [JSON output from pacing-analyzer],
-    "tension": [JSON output from tension-monitor]
+    "tension": [JSON output from tension-monitor],
+    "plot": [JSON output from plot-coherence-checker],
+    "story": [JSON output from story-quality-agent]
   }
 
 Error handling:
@@ -254,11 +262,13 @@ If specific_checker != null (running one checker):
 
 Map checker name to agent file:
   checker_map = {
-    "canon": "claude_src/novel/agents/canon-checker.md",
-    "timeline": "claude_src/novel/agents/timeline-keeper.md",
-    "voice": "claude_src/novel/agents/voice-coach.md",
-    "pacing": "claude_src/novel/agents/pacing-analyzer.md",
-    "tension": "claude_src/novel/agents/tension-monitor.md"
+    "canon": ".claude/novel/agents/canon-checker.md",
+    "timeline": ".claude/novel/agents/timeline-keeper.md",
+    "voice": ".claude/novel/agents/voice-coach.md",
+    "pacing": ".claude/novel/agents/pacing-analyzer.md",
+    "tension": ".claude/novel/agents/tension-monitor.md",
+    "plot": ".claude/novel/agents/plot-coherence-checker.md",
+    "story": ".claude/novel/agents/story-quality-agent.md"
   }
 
 Spawn single agent:
@@ -1140,7 +1150,7 @@ Spawn novel-editor agent via Task tool:
 4. Agent writes: check_reports/[timestamp]/editorial_letter.md
 
 Task spawn:
-  agent_file = "claude_src/novel/agents/novel-editor.md"
+  agent_file = ".claude/novel/agents/novel-editor.md"
   prompt = "Read all checker JSON files from {report_dir} and generate editorial letter."
 
 Error handling:
@@ -1193,7 +1203,7 @@ Spawn novel-quality-gate agent via Task tool:
 4. Agent writes: check_reports/[timestamp]/quality_decision.json
 
 Task spawn:
-  agent_file = "claude_src/novel/agents/novel-quality-gate.md"
+  agent_file = ".claude/novel/agents/novel-quality-gate.md"
   prompt = "Evaluate checker results from {report_dir} and generate quality decision."
 
 Error handling:
