@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # validate-schemas.sh - Validate JSON schemas and default state files
-# Usage: bash claude_src/novel/schemas/validate-schemas.sh
+# Usage: bash .claude/novel/schemas/validate-schemas.sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PASS_COUNT=0

@@ -149,6 +149,81 @@
           }
         }
       }
+    },
+    "emotional_arcs": {
+      "type": "object",
+      "description": "Detailed emotional trajectory tracking per character",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "baseline_emotion": {
+            "type": "string",
+            "description": "Character's default emotional state"
+          },
+          "current_emotion": {
+            "type": "string",
+            "description": "Current emotional state"
+          },
+          "current_intensity": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10,
+            "description": "Emotional intensity (1=calm, 10=overwhelming)"
+          },
+          "trajectory": {
+            "type": "array",
+            "description": "Emotional state history",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scene_id": { "type": "string" },
+                "emotion": { "type": "string" },
+                "intensity": { "type": "integer", "minimum": 1, "maximum": 10 },
+                "trigger": { "type": "string" },
+                "notes": { "type": "string" }
+              }
+            }
+          },
+          "fatigue_level": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "Emotional exhaustion level (needs recovery if high)"
+          },
+          "last_recovery_scene": {
+            "type": "string",
+            "description": "Last scene where character had emotional breather"
+          },
+          "breakthrough_moments": {
+            "type": "array",
+            "description": "Key emotional breakthrough scenes",
+            "items": {
+              "type": "object",
+              "properties": {
+                "scene_id": { "type": "string" },
+                "realization": { "type": "string" },
+                "arc_impact": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "knowledge_timeline": {
+      "type": "object",
+      "description": "Tracks what each character knows and when they learned it",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "fact": { "type": "string" },
+            "learned_scene": { "type": "string" },
+            "source": { "type": "string" },
+            "can_share": { "type": "boolean", "default": true }
+          }
+        }
+      }
     }
   }
 }
