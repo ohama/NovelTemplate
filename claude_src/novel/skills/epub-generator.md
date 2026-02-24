@@ -116,7 +116,7 @@ Extract metadata from canon/premise.md and create metadata.yaml:
 
 ### Metadata Template
 
-Copy from `claude_src/novel/templates/epub/metadata.yaml` and fill in values:
+Copy from `.claude/novel/templates/epub/metadata.yaml` and fill in values:
 
 ```yaml
 ---
@@ -492,12 +492,12 @@ generate_epub "draft/compiled/novel_v$(date +%Y%m%d).epub"
    Expected: "Pandoc found: pandoc 2.x.x"
 
 2. **Prepare Metadata**
-   - Copy template: cp claude_src/novel/templates/epub/metadata.yaml draft/compiled/
+   - Copy template: cp .claude/novel/templates/epub/metadata.yaml draft/compiled/
    - Edit: Fill in title, author, description
    - Verify: Check required fields present
 
 3. **Prepare Styling**
-   - Copy template: cp claude_src/novel/templates/epub/epub.css draft/compiled/
+   - Copy template: cp .claude/novel/templates/epub/epub.css draft/compiled/
    - Customize: Edit typography if desired
 
 4. **Verify Scenes**

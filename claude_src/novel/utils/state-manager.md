@@ -21,7 +21,7 @@ state/
 ## Schemas Location
 
 ```
-claude_src/novel/schemas/
+.claude/novel/schemas/
 ├── story_state.schema.json
 ├── character_state.schema.json
 ├── timeline_state.schema.json
@@ -57,7 +57,7 @@ claude_src/novel/schemas/
    d. Return parsed object
 4. If file missing:
    a. Log warning: "State file missing, using defaults"
-   b. Read default from: claude_src/novel/schemas/{type}_state.default.json
+   b. Read default from: .claude/novel/schemas/{type}_state.default.json
    c. Return default object
 5. If JSON parse fails:
    a. Log error: "Corrupted state file: {path}"
@@ -504,7 +504,7 @@ Two additional timestamp fields track check and approval times:
 
 ## Version Tracking
 
-The `versions` object tracks draft snapshots for recovery and comparison. This integrates with the version-manager skill (see `claude_src/novel/skills/version-manager.md`).
+The `versions` object tracks draft snapshots for recovery and comparison. This integrates with the version-manager skill (see `.claude/novel/skills/version-manager.md`).
 
 ### Versions Object Structure
 
