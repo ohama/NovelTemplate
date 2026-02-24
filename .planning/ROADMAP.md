@@ -139,25 +139,12 @@ Plans:
 - User can run `/novel:publish` and receive compiled EPUB file
 - EPUB includes proper metadata, chapters, and table of contents
 
-**Plans:**
-1. **Version Management**
-   - Implement snapshot system (draft/versions/YYYYMMDD_HHMMSS/)
-   - Build diff tool for version comparison
-   - Add rollback functionality
-   - Update state files with version references
+**Plans:** 3 plans
 
-2. **EPUB Export**
-   - Integrate Pandoc for EPUB generation
-   - Compile Markdown scenes into chapters
-   - Add metadata from premise.md (title, author, genre)
-   - Generate table of contents
-
-3. **/novel:publish Command**
-   - Build publishing skill
-   - Validate all scenes are approved
-   - Compile Markdown into single manuscript
-   - Generate EPUB with Pandoc
-   - Output to published/ directory
+Plans:
+- [ ] 06-01-PLAN.md — Version Management (snapshot, diff, rollback)
+- [ ] 06-02-PLAN.md — EPUB Export (Pandoc integration, metadata, templates)
+- [ ] 06-03-PLAN.md — /novel:publish Command (orchestrate publish workflow)
 
 ---
 
@@ -197,4 +184,4 @@ Plans:
 *Phase 3 completed: 2026-02-24*
 *Phase 4 completed: 2026-02-24*
 *Phase 5 completed: 2026-02-24*
-*Next step: Plan Phase 6*
+*Phase 6 planned: 2026-02-24*
