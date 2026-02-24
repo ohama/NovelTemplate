@@ -2,23 +2,23 @@
 
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
-**Current Phase:** 2 (Planning Pipeline) - IN PROGRESS
-**Current Plan:** 02-02 Complete
+**Current Phase:** 2 (Planning Pipeline) - COMPLETE
+**Current Plan:** 02-04 Complete
 
 ---
 
 ## Project Status
 
-**Phase:** Phase 2 - Planning Pipeline (IN PROGRESS)
+**Phase:** Phase 2 - Planning Pipeline (COMPLETE)
 **Mode:** yolo
 **Parallelization:** enabled
 
 **Progress:**
-- Phases completed: 1/6
-- Plans completed: 5/18
-- Requirements completed: ~14/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent, beat-planner agent)
+- Phases completed: 2/6
+- Plans completed: 6/18
+- Requirements completed: ~16/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent, beat-planner agent, diary-planner agent, outline command)
 
-**Progress Bar:** [===========−--------] 28%
+**Progress Bar:** [=============-------] 33%
 
 ---
 
@@ -35,7 +35,7 @@
 | Phase | Name | Status | Requirements | Plans | Completion |
 |-------|------|--------|--------------|-------|------------|
 | 1 | Foundation & Canon System | COMPLETE | 12 | 3 | 100% |
-| 2 | Planning Pipeline | In Progress | 4 | 3 | 67% |
+| 2 | Planning Pipeline | COMPLETE | 4 | 3 | 100% |
 | 3 | Drafting Engine | Pending | 8 | 3 | 0% |
 | 4 | Quality Checks | Pending | 6 | 3 | 0% |
 | 5 | Revision Loop | Pending | 2 | 3 | 0% |
@@ -45,11 +45,11 @@
 
 ## Active Work
 
-**Current Phase:** 2 - Planning Pipeline (IN PROGRESS)
-**Current Plan:** 02-02 Complete
+**Current Phase:** 2 - Planning Pipeline (COMPLETE)
+**Current Plan:** 02-04 Complete
 **Active Tasks:** None
 
-**Ready for:** Plan 02-03 or continue Phase 2 planning agents
+**Ready for:** Phase 3 - Drafting Engine
 
 ---
 
@@ -57,19 +57,19 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 02-04: /novel:outline Orchestrator Command |
+| 2026-02-24 | Completed Plan 02-03: Diary Planner Agent |
 | 2026-02-24 | Completed Plan 02-02: Beat Planner Agent |
 | 2026-02-24 | Completed Plan 02-01: Plot Planner Agent |
-| 2026-02-24 | Completed Plan 01-03: /novel:status Command & Git Integration |
-| 2026-02-24 | Completed Plan 01-02: /novel:init Command |
 
 ---
 
 ## Next Steps
 
-1. Continue Phase 2: Planning Pipeline
-2. Execute Plan 02-03: Additional planning agents as needed
-3. Build multi-agent coordination pipeline
-4. Move to Phase 3: Drafting Engine
+1. Begin Phase 3: Drafting Engine
+2. Build /novel:write command
+3. Create scene-writer agent
+4. Implement scene-by-scene drafting workflow
 
 ---
 
@@ -98,6 +98,11 @@
 | 2026-02-24 | Beat sheets are 150-300 word planning notes | Provides structure for scene-writer without over-constraining creative decisions (progressive disclosure) |
 | 2026-02-24 | 2-5 scenes per chapter based on complexity | Balances narrative granularity with practical drafting workload |
 | 2026-02-24 | POV rotation logic for multi-POV stories | Respects narrative voice decisions while ensuring fair character representation |
+| 2026-02-24 | Sequential agent execution (plot → beat → diary) | Ensures dependencies are met - beat-planner needs outline from plot-planner, diary-planner needs scenes from beat-planner |
+| 2026-02-24 | Auto-commit canon before outline generation | Preserves user edits in git history before agents read canon, enables rollback if generated outline is poor |
+| 2026-02-24 | Backup beats/ before regeneration | Prevents data loss if user accidentally regenerates - restore from beats.backup.[timestamp] |
+| 2026-02-24 | Conditional diary-planner invocation | Only runs when format == "diary" - chapter format doesn't need diary-specific planning |
+| 2026-02-24 | Comprehensive validation in /novel:outline | Guides user through issues with actionable error messages rather than cryptic failures |
 
 ---
 
@@ -126,9 +131,9 @@
 
 ## Session Continuity
 
-**Last session:** 2026-02-24 05:32 UTC
-**Stopped at:** Completed Plan 02-02 (Beat Planner Agent)
-**Resume file:** .planning/phases/02-planning-pipeline/02-03-PLAN.md
+**Last session:** 2026-02-24 05:40 UTC
+**Stopped at:** Completed Plan 02-04 (/novel:outline Command) - Phase 2 Complete
+**Resume file:** .planning/phases/03-drafting-engine/03-01-PLAN.md
 
 ---
 
@@ -145,7 +150,16 @@
 | Git Integration | claude_src/novel/skills/git-integration.md |
 | Command Symlinks | .claude/commands/novel/*.md |
 
+## Phase 2 Artifacts Summary
+
+| Artifact | Location |
+|----------|----------|
+| plot-planner Agent | claude_src/novel/agents/plot-planner.md |
+| beat-planner Agent | claude_src/novel/agents/beat-planner.md |
+| diary-planner Agent | claude_src/novel/agents/diary-planner.md |
+| /novel:outline Command | claude_src/novel/commands/outline.md |
+
 ---
 
 *State updated: 2026-02-24*
-*Phase 1 complete, ready for Phase 2*
+*Phase 2 complete, ready for Phase 3*
