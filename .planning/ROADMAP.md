@@ -117,24 +117,12 @@ Plans:
 - Rejected scenes trigger automatic rewrite with editor notes
 - Approved scenes are marked as "final" in state files
 
-**Plans:**
-1. **Editor Agent**
-   - Build novel-editor agent
-   - Consume checker reports
-   - Identify rewrite targets (plot holes, weak dialogue, pacing)
-   - Generate actionable revision tasks
+**Plans:** 3 plans
 
-2. **Quality Gate Agent**
-   - Build novel-quality-gate agent
-   - Apply approval criteria (max violations, critical errors)
-   - Decide approve/reject with reasoning
-   - Track revision cycles in state
-
-3. **Revision Workflow Integration**
-   - Connect /novel:check → editor → quality-gate pipeline
-   - Implement rewrite triggers
-   - Version tracking for revision iterations
-   - Update /novel:status to show revision progress
+Plans:
+- [ ] 05-01-PLAN.md — Editorial & Quality Gate Agents (novel-editor, novel-quality-gate)
+- [ ] 05-02-PLAN.md — Pipeline Integration & State Tracking (extend /novel:check, revision_history schema)
+- [ ] 05-03-PLAN.md — Verification & Testing (end-to-end revision loop validation)
 
 ---
 
@@ -208,4 +196,4 @@ Plans:
 *Phase 2 completed: 2026-02-24*
 *Phase 3 completed: 2026-02-24*
 *Phase 4 completed: 2026-02-24*
-*Next step: Plan Phase 5*
+*Next step: Execute Phase 5*
