@@ -35,17 +35,17 @@
 
 ### Checking Agents
 
-- [ ] **AGENT-07**: novel-canon-checker 에이전트 (캐논 모순 감지)
-- [ ] **AGENT-08**: novel-timeline-keeper 에이전트 (시간순 검증)
-- [ ] **AGENT-09**: novel-voice-coach 에이전트 (캐릭터 목소리 일관성)
-- [ ] **AGENT-10**: novel-pacing-analyzer 에이전트 (리듬과 흐름 분석)
-- [ ] **AGENT-11**: novel-tension-monitor 에이전트 (갈등과 긴장감 모니터링)
+- [x] **AGENT-07**: novel-canon-checker 에이전트 (캐논 모순 감지)
+- [x] **AGENT-08**: novel-timeline-keeper 에이전트 (시간순 검증)
+- [x] **AGENT-09**: novel-voice-coach 에이전트 (캐릭터 목소리 일관성)
+- [x] **AGENT-10**: novel-pacing-analyzer 에이전트 (리듬과 흐름 분석)
+- [x] **AGENT-11**: novel-tension-monitor 에이전트 (갈등과 긴장감 모니터링)
 
 ### Commands
 
 - [x] **CMD-01**: /novel:init 스킬 (프로젝트 초기화)
 - [x] **CMD-02**: /novel:write 스킬 (다음 씬/일기 작성)
-- [ ] **CMD-03**: /novel:check 스킬 (일관성 검사)
+- [x] **CMD-03**: /novel:check 스킬 (일관성 검사)
 - [x] **CMD-04**: /novel:status 스킬 (진행 상황 확인)
 - [x] **CMD-05**: /novel:outline 스킬 (아웃라인 생성)
 - [ ] **CMD-06**: /novel:publish 스킬 (챕터 컴파일)
@@ -113,14 +113,14 @@
 | AGENT-04 | Phase 3: Drafting Engine | 3.1 Scene Writer Agent | Complete |
 | AGENT-05 | Phase 5: Revision Loop | 5.1 Editor Agent | Pending |
 | AGENT-06 | Phase 5: Revision Loop | 5.2 Quality Gate Agent | Pending |
-| AGENT-07 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Pending |
-| AGENT-08 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Pending |
-| AGENT-09 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Pending |
-| AGENT-10 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Pending |
-| AGENT-11 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
+| AGENT-07 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Complete |
+| AGENT-08 | Phase 4: Quality Checks | 4.1 Canon & Timeline Checkers | Complete |
+| AGENT-09 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Complete |
+| AGENT-10 | Phase 4: Quality Checks | 4.2 Voice & Pacing Analyzers | Complete |
+| AGENT-11 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Complete |
 | CMD-01 | Phase 1: Foundation & Canon System | 1.2 /novel:init Command | Complete |
 | CMD-02 | Phase 3: Drafting Engine | 3.2 /novel:write Command | Complete |
-| CMD-03 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Pending |
+| CMD-03 | Phase 4: Quality Checks | 4.3 Tension Monitor & /novel:check Command | Complete |
 | CMD-04 | Phase 1: Foundation & Canon System | 1.3 /novel:status Command & Git Integration | Complete |
 | CMD-05 | Phase 2: Planning Pipeline | 2.3 Diary Planner Agent & /novel:outline Command | Complete |
 | CMD-06 | Phase 6: Advanced Features | 6.3 /novel:publish Command | Pending |
@@ -150,5 +150,5 @@
 
 ---
 *Requirements defined: 2026-02-24*
-*Last updated: 2026-02-24 after Phase 3 completion*
-*Completed: 23/35 requirements (Phase 1: 12, Phase 2: 4, Phase 3: 7)*
+*Last updated: 2026-02-24 after Phase 4 completion*
+*Completed: 29/35 requirements (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6)*

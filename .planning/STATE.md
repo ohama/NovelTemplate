@@ -16,9 +16,9 @@
 **Progress:**
 - Phases completed: 4/6
 - Plans completed: 12/18
-- Requirements completed: 33/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6, Phase 5: 0, Phase 6: 0)
+- Requirements completed: 29/35 (Phase 1: 12, Phase 2: 4, Phase 3: 7, Phase 4: 6)
 
-**Progress Bar:** [====================] 67%
+**Progress Bar:** [████████████████░░░░] 67%
 
 ---
 

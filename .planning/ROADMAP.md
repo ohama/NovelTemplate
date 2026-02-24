@@ -95,22 +95,12 @@ Plans:
 - Tension levels are analyzed with recommendations
 - Check reports include actionable fix suggestions
 
-**Plans:**
-1. **Canon & Timeline Checkers**
-   - Build novel-canon-checker agent (contradictions, fact errors)
-   - Build novel-timeline-keeper agent (date/time violations)
-   - Cross-reference draft scenes against canon and timeline_state.json
+**Plans:** 3 plans
 
-2. **Voice & Pacing Analyzers**
-   - Build novel-voice-coach agent (character consistency)
-   - Build novel-pacing-analyzer agent (scene rhythm, word count distribution)
-   - Compare against style_guide.md and character profiles
-
-3. **Tension Monitor & /novel:check Command**
-   - Build novel-tension-monitor agent (conflict presence, stakes)
-   - Integrate all checkers into /novel:check skill
-   - Generate unified quality report
-   - Parallel checker execution
+Plans:
+- [x] 04-01-PLAN.md — Canon & Timeline Checkers (canon-checker, timeline-keeper agents)
+- [x] 04-02-PLAN.md — Voice & Pacing Analyzers (voice-coach, pacing-analyzer agents)
+- [x] 04-03-PLAN.md — Tension Monitor & /novel:check Command (tension-monitor, orchestration, parallel execution)
 
 ---
 
@@ -197,7 +187,7 @@ Plans:
 - Phase 5: 2 requirements (Revision)
 - Phase 6: 5 requirements (Advanced Features)
 
-**Validation:** ✓ All v1 requirements mapped to exactly one phase
+**Validation:** All v1 requirements mapped to exactly one phase
 
 ---
 
@@ -217,4 +207,5 @@ Plans:
 *Phase 1 completed: 2026-02-24*
 *Phase 2 completed: 2026-02-24*
 *Phase 3 completed: 2026-02-24*
-*Next step: Plan Phase 4*
+*Phase 4 completed: 2026-02-24*
+*Next step: Plan Phase 5*
