@@ -1116,10 +1116,881 @@ Individual checker reports:
 
 ---
 
+## Step 6: Spawn Novel Editor Agent
+
+After saving checker reports, spawn the editorial synthesis agent.
+
+### Spawn 6.1: Editor Agent Invocation
+
+```markdown
+Spawn novel-editor agent via Task tool:
+
+1. Pass the check report directory path:
+   report_dir = "check_reports/[timestamp]"
+
+2. Agent reads all 5 checker JSON files from report_dir:
+   - canon_check.json
+   - timeline_check.json
+   - voice_check.json
+   - pacing_check.json
+   - tension_check.json
+
+3. Agent synthesizes findings into prioritized editorial feedback
+
+4. Agent writes: check_reports/[timestamp]/editorial_letter.md
+
+Task spawn:
+  agent_file = "claude_src/novel/agents/novel-editor.md"
+  prompt = "Read all checker JSON files from {report_dir} and generate editorial letter."
+
+Error handling:
+  If agent fails:
+    WARNING: "Editorial letter generation failed - continuing without editorial"
+    Log error but don't stop execution
+    Quality gate can still proceed with checker data
+```
+
+### Spawn 6.2: Verify Editorial Output
+
+```markdown
+After editor agent completes:
+
+1. Check if editorial_letter.md was created:
+   filepath = "check_reports/[timestamp]/editorial_letter.md"
+
+2. If file exists:
+   editorial_generated = true
+   Log: "Editorial letter generated: {filepath}"
+
+3. If file missing:
+   editorial_generated = false
+   WARNING: "Editorial letter not generated - check editor agent"
+   Continue with quality gate (editorial is advisory, not required)
+```
+
+---
+
+## Step 7: Spawn Novel Quality Gate Agent
+
+After editor completes, spawn the quality gate agent for approval decisions.
+
+### Spawn 7.1: Quality Gate Agent Invocation
+
+```markdown
+Spawn novel-quality-gate agent via Task tool:
+
+1. Pass the check report directory path:
+   report_dir = "check_reports/[timestamp]"
+
+2. Agent reads:
+   - All 5 checker JSON files from report_dir
+   - Optional: state/quality_criteria.json for custom thresholds
+
+3. Agent evaluates each scene against criteria:
+   - Default: 0 CRITICAL, 2 MAJOR max per scene
+   - Custom thresholds if quality_criteria.json exists
+
+4. Agent writes: check_reports/[timestamp]/quality_decision.json
+
+Task spawn:
+  agent_file = "claude_src/novel/agents/novel-quality-gate.md"
+  prompt = "Evaluate checker results from {report_dir} and generate quality decision."
+
+Error handling:
+  If agent fails:
+    ERROR: "Quality gate evaluation failed"
+    Log error and continue with partial results
+    Skip state update (Step 8) if quality_decision.json not created
+```
+
+### Spawn 7.2: Parse Quality Decision
+
+```markdown
+After quality gate agent completes:
+
+1. Read check_reports/[timestamp]/quality_decision.json
+
+2. Parse JSON structure:
+   {
+     "timestamp": "[ISO 8601]",
+     "overall_status": "APPROVED" | "NEEDS_REVISION" | "CRITICAL_ISSUES",
+     "status_description": "[summary message]",
+     "criteria_used": { critical_threshold, major_threshold, minor_threshold },
+     "scenes_evaluated": [count],
+     "scenes_approved": [count],
+     "scenes_need_revision": [count],
+     "summary": { critical_issues, major_issues, minor_issues },
+     "scene_decisions": [...],
+     "recommended_actions": [...]
+   }
+
+3. Store parsed data for state update and display:
+   quality_decision = parsed JSON
+   quality_gate_success = true
+
+4. If file missing or parse fails:
+   quality_gate_success = false
+   WARNING: "Quality decision parsing failed"
+   Skip state update
+```
+
+---
+
+## Step 8: Update Story State with Revision Tracking
+
+Update story_state.json with quality gate results.
+
+### Update 8.1: Load Current State
+
+```markdown
+1. Read state/story_state.json
+2. Parse JSON
+3. Extract scene_index array
+
+If file missing or invalid:
+  WARNING: "Could not load story state for update"
+  Skip state update
+  Continue to display (Step 9)
+```
+
+### Update 8.2: Apply Scene Decisions
+
+```markdown
+For each scene_decision in quality_decision.scene_decisions:
+
+1. Find matching scene in scene_index by id:
+   scene = scene_index.find(s => s.id == scene_decision.scene_id)
+
+2. If scene not found:
+   WARNING: "Scene {scene_id} not in scene_index - skipping"
+   Continue to next scene
+
+3. Update scene status based on decision:
+   If scene_decision.decision == "APPROVED":
+     scene.status = "approved"
+     scene.approved_at = quality_decision.timestamp
+
+   Else if scene_decision.decision == "NEEDS_REVISION":
+     scene.status = "needs_revision"
+
+4. Increment revision_count:
+   If scene.revision_count exists:
+     scene.revision_count += 1
+   Else:
+     scene.revision_count = 1
+
+5. Update last_check timestamp:
+   scene.last_check = quality_decision.timestamp
+
+6. Append to revision_history array:
+   If scene.revision_history does not exist:
+     scene.revision_history = []
+
+   revision_cycle = {
+     "cycle": scene.revision_count,
+     "timestamp": quality_decision.timestamp,
+     "check_report": "check_reports/[timestamp]",
+     "issues_found": {
+       "critical": scene_decision.issues.critical,
+       "major": scene_decision.issues.major,
+       "minor": scene_decision.issues.minor
+     },
+     "decision": scene_decision.decision.toLowerCase(),
+     "blocking_issues": [
+       // Extract brief descriptions from scene_decision.blocking_issues
+       issue.type + ": " + truncate(issue.description, 50) for issue in blocking_issues
+     ],
+     "editorial_focus": [
+       // Extract unique checker names from blocking_issues
+       unique checkers that flagged this scene
+     ]
+   }
+
+   scene.revision_history.append(revision_cycle)
+```
+
+### Update 8.3: Save Updated State
+
+```markdown
+1. Update project.last_modified timestamp
+
+2. Validate state before saving:
+   - All scene statuses are valid enum values
+   - revision_count is non-negative integer
+   - revision_history is array
+
+3. Write updated state to state/story_state.json:
+   Write(state_path, JSON.stringify(updated_state, indent=2))
+
+4. If write fails:
+   WARNING: "Failed to save story state"
+   Continue to display (Step 9)
+
+5. Log success:
+   "Updated story_state.json: {scenes_approved} approved, {scenes_need_revision} need revision"
+```
+
+---
+
+## Step 9: Display Extended Summary
+
+Display summary including quality gate decision.
+
+### Display 9.1: Quality Gate Decision Section
+
+```markdown
+Add to console output after recommendations:
+
+========================================
+QUALITY GATE DECISION
+========================================
+
+**Overall Status:** [quality_decision.overall_status]
+[quality_decision.status_description]
+
+**Criteria Applied:**
+  CRITICAL threshold: [critical_threshold] (0 = hard blocker)
+  MAJOR threshold:    [major_threshold] per scene
+  MINOR threshold:    [minor_threshold] (advisory only)
+
+**Scene Results:**
+  Evaluated:      [scenes_evaluated]
+  Approved:       [scenes_approved]
+  Need Revision:  [scenes_need_revision]
+
+[If scenes_need_revision > 0:]
+**Scenes Needing Revision:**
+[For each scene in scene_decisions where decision == "NEEDS_REVISION":]
+  - [scene_id]: [reason]
+    Blocking: [list blocking issue types, comma-separated]
+
+[If all scenes approved:]
+**All scenes approved!** Ready for publication.
+
+========================================
+```
+
+### Display 9.2: Editorial Letter Reference
+
+```markdown
+[If editorial_generated == true:]
+
+EDITORIAL LETTER:
+  [report_dir]/editorial_letter.md
+
+  Contains:
+  - What Works Well (1-3 items)
+  - Revision Priorities (Must/Should/Could)
+  - Revision Plan with time estimates
+  - Next Steps
+
+  Review for detailed revision guidance.
+```
+
+### Display 9.3: File Locations Summary
+
+```markdown
+Print final file summary:
+
+========================================
+OUTPUT FILES
+========================================
+
+Check Report Directory:
+  [report_dir]
+
+Files Generated:
+  - summary.md              (consolidated quality report)
+  - canon_check.json        (canon checker output)
+  - timeline_check.json     (timeline keeper output)
+  - voice_check.json        (voice coach output)
+  - pacing_check.json       (pacing analyzer output)
+  - tension_check.json      (tension monitor output)
+  - editorial_letter.md     (editorial feedback) [If generated]
+  - quality_decision.json   (approval decision) [If generated]
+
+State Updates:
+  - story_state.json updated with scene statuses and revision history
+
+========================================
+```
+
+### Display 9.4: Updated Next Steps
+
+```markdown
+Update NEXT STEPS section based on quality gate:
+
+[If overall_status == "CRITICAL_ISSUES":]
+NEXT STEPS:
+
+  CRITICAL issues must be fixed before proceeding.
+
+  1. Fix CRITICAL issues in flagged scenes:
+     [list scene_ids with critical issues]
+  2. Review: [report_dir]/editorial_letter.md
+  3. Run /novel:check again after fixes
+  4. CRITICAL issues block approval until resolved
+
+[Else if overall_status == "NEEDS_REVISION":]
+NEXT STEPS:
+
+  Some scenes need revision before approval.
+
+  1. Review editorial letter: [report_dir]/editorial_letter.md
+  2. Fix issues in flagged scenes:
+     [list scene_ids needing revision]
+  3. Run /novel:check again to verify fixes
+  4. Approved scenes: [scenes_approved] (no action needed)
+
+[Else if overall_status == "APPROVED":]
+NEXT STEPS:
+
+  All scenes approved! Manuscript ready for next phase.
+
+  1. Review editorial letter for optional polish suggestions
+  2. Proceed to /novel:publish (Phase 6 feature)
+  3. Run /novel:check periodically during future drafting
+
+========================================
+```
+
+</execution>
+
+---
+
+<error_handling>
+
+## Error Scenarios
+
+### No Drafted Scenes
+
+**Trigger:** scene_index has no scenes with status "drafted"
+
+**Response:**
+```
+ERROR: No scenes to check.
+
+Quality checks require at least one drafted scene.
+
+Next steps:
+  1. Run /novel:outline to plan story structure
+  2. Run /novel:write to draft scenes
+  3. Run /novel:check after scenes are drafted
+```
+
+### Checker Agent Fails
+
+**Trigger:** Checker agent execution throws error or returns invalid JSON
+
+**Response:**
+- Log warning: "WARNING: [checker] failed to complete"
+- Continue with remaining checkers
+- Include failure note in final report
+- Display warning to user in summary
+
+**Don't stop execution** - partial results are valuable.
+
+### Editor Agent Fails
+
+**Trigger:** novel-editor agent fails to complete or write editorial_letter.md
+
+**Response:**
+- Log warning: "WARNING: Editorial letter generation failed"
+- Continue with quality gate (editorial is advisory, not blocking)
+- Note in output that editorial is not available
+- Quality gate can still make decisions based on checker data
+
+### Quality Gate Agent Fails
+
+**Trigger:** novel-quality-gate agent fails to complete or write quality_decision.json
+
+**Response:**
+- Log warning: "WARNING: Quality gate evaluation failed"
+- Display checker summary (Steps 5-6 output)
+- Skip state update (Step 8)
+- Recommend user run /novel:check again
+
+### State Update Fails
+
+**Trigger:** story_state.json write fails (permissions, disk full, etc.)
+
+**Response:**
+- Log warning: "WARNING: Failed to update story state"
+- Display quality decision to console
+- Files in check_reports/ still available
+- User can manually track status changes
+
+### Report Directory Creation Fails
+
+**Trigger:** mkdir fails (permissions, disk full, etc.)
+
+**Response:**
+- Log warning: "Could not create report directory"
+- Display all report content to console
+- Don't save files
+- Continue execution
+
+**User sees results** even if files can't be written.
+
+### Git Not Available
+
+**Trigger:** git commands fail or .git directory missing
+
+**Response:**
+- No special handling needed
+- Reports are saved to check_reports/ (not committed)
+- User can manually commit if desired
+
+**No git operations in this command** - just file writes.
+
+### Invalid Checker Argument
+
+**Trigger:** User provides unrecognized checker name
+
+**Response:**
+```
+ERROR: Unknown checker '[name]'
+
+Available checkers:
+  - canon
+  - timeline
+  - voice
+  - pacing
+  - tension
+
+Run all checkers:
+  /novel:check
+```
+
+</error_handling>
+
+---
+
+<validation>
+
+After completing quality check, verify success:
+
+**Checklist:**
+- [ ] All requested checkers executed (or specific checker if argument provided)
+- [ ] JSON outputs parsed successfully (or warnings logged for failures)
+- [ ] Issues consolidated and sorted by severity
+- [ ] Overall status determined correctly
+- [ ] Report directory created with timestamp
+- [ ] Individual JSON files written for each checker
+- [ ] summary.md generated with all issues formatted
+- [ ] Editorial letter generated (or warning logged if failed)
+- [ ] Quality decision generated (or warning logged if failed)
+- [ ] Story state updated with scene statuses and revision history
+- [ ] Console summary displayed to user with quality gate decision
+- [ ] Recommendations provided based on findings
+- [ ] Next steps clear and actionable
+
+**Validation Report:**
+
+```
+Quality check validation:
+- Checkers executed: [count] of [requested]
+- Scenes checked: [count]
+- Reports saved: [report_dir]
+- Editorial letter: [generated | failed]
+- Quality gate: [overall_status]
+- State updated: [success | failed]
+- Issues found: [critical] critical, [major] major, [minor] minor
+- Scenes approved: [count]
+- Scenes need revision: [count]
+```
+
+</validation>
+
+---
+
+<examples>
+
+## Example 1: Full Check with Issues Found
+
+**Command:** `/novel:check`
+
+**Scenario:** 8 scenes drafted, multiple issues across checkers
+
+**Console Output:**
+```
+========================================
+RUNNING QUALITY CHECKS
+========================================
+
+Scenes to check: 8
+Checkers: 5
+
+Running in parallel:
+  - Canon Checker: Verifying facts against canon
+  - Timeline Keeper: Checking chronological integrity
+  - Voice Coach: Analyzing POV, tense, and style
+  - Pacing Analyzer: Evaluating scene rhythm
+  - Tension Monitor: Measuring conflict and stakes
+
+Processing...
+
+========================================
+QUALITY CHECK COMPLETE
+========================================
+
+**Overall Status:** NEEDS ATTENTION
+
+**Summary:**
+  Critical: 0
+  Major:    4
+  Minor:    7
+
+**Scenes Checked:** 8
+
+========================================
+
+| Checker           | Critical | Major | Minor | Status      |
+|-------------------|----------|-------|-------|-------------|
+| Canon Checker     | 0        | 1     | 2     | ATTENTION   |
+| Timeline Keeper   | 0        | 0     | 1     | SUGGESTIONS |
+| Voice Coach       | 0        | 2     | 1     | ATTENTION   |
+| Pacing Analyzer   | 0        | 1     | 2     | ATTENTION   |
+| Tension Monitor   | 0        | 0     | 1     | SUGGESTIONS |
+
+========================================
+MAJOR ISSUES (Should Fix)
+========================================
+
+- [ch02_s01] Canon: Character eye color inconsistency
+- [ch03_s02] Voice: POV shift detected mid-scene
+- [ch04_s01] Voice: Forbidden phrase used: "suddenly"
+- [ch05_s03] Pacing: Scene significantly underwritten (48% below target)
+
+========================================
+MINOR ISSUES (Nice to Fix)
+========================================
+
+Found 7 minor issues across scenes.
+See full report for details: check_reports/2026-02-24_14-30/summary.md
+
+========================================
+RECOMMENDATIONS
+========================================
+
+1. Fix character consistency error in ch02_s01 (canon)
+2. Review voice consistency in ch03-04 scenes
+3. Expand underwritten climactic scene ch05_s03
+
+========================================
+QUALITY GATE DECISION
+========================================
+
+**Overall Status:** NEEDS_REVISION
+4 scene(s) need revision before approval
+
+**Criteria Applied:**
+  CRITICAL threshold: 0 (0 = hard blocker)
+  MAJOR threshold:    2 per scene
+  MINOR threshold:    999 (advisory only)
+
+**Scene Results:**
+  Evaluated:      8
+  Approved:       4
+  Need Revision:  4
+
+**Scenes Needing Revision:**
+  - ch02_s01: 1 MAJOR issue
+    Blocking: character_fact
+  - ch03_s02: 2 MAJOR issues exceed threshold
+    Blocking: character_voice, style_guide
+  - ch04_s01: 1 MAJOR issue
+    Blocking: style_guide
+  - ch05_s03: 1 MAJOR issue
+    Blocking: scene_length
+
+========================================
+
+EDITORIAL LETTER:
+  check_reports/2026-02-24_14-30/editorial_letter.md
+
+  Contains:
+  - What Works Well (1-3 items)
+  - Revision Priorities (Must/Should/Could)
+  - Revision Plan with time estimates
+  - Next Steps
+
+  Review for detailed revision guidance.
+
+========================================
+OUTPUT FILES
+========================================
+
+Check Report Directory:
+  check_reports/2026-02-24_14-30
+
+Files Generated:
+  - summary.md              (consolidated quality report)
+  - canon_check.json        (canon checker output)
+  - timeline_check.json     (timeline keeper output)
+  - voice_check.json        (voice coach output)
+  - pacing_check.json       (pacing analyzer output)
+  - tension_check.json      (tension monitor output)
+  - editorial_letter.md     (editorial feedback)
+  - quality_decision.json   (approval decision)
+
+State Updates:
+  - story_state.json updated with scene statuses and revision history
+
+========================================
+
+NEXT STEPS:
+
+  Some scenes need revision before approval.
+
+  1. Review editorial letter: check_reports/2026-02-24_14-30/editorial_letter.md
+  2. Fix issues in flagged scenes:
+     ch02_s01, ch03_s02, ch04_s01, ch05_s03
+  3. Run /novel:check again to verify fixes
+  4. Approved scenes: 4 (no action needed)
+
+========================================
+```
+
+**Files Created:**
+- check_reports/2026-02-24_14-30/summary.md (detailed report)
+- check_reports/2026-02-24_14-30/canon_check.json
+- check_reports/2026-02-24_14-30/timeline_check.json
+- check_reports/2026-02-24_14-30/voice_check.json
+- check_reports/2026-02-24_14-30/pacing_check.json
+- check_reports/2026-02-24_14-30/tension_check.json
+- check_reports/2026-02-24_14-30/editorial_letter.md
+- check_reports/2026-02-24_14-30/quality_decision.json
+
+---
+
+## Example 2: Single Checker Mode
+
+**Command:** `/novel:check voice`
+
+**Scenario:** Running only voice-coach on 5 scenes
+
+**Console Output:**
+```
+========================================
+RUNNING QUALITY CHECKS
+========================================
+
+Scenes to check: 5
+Checkers: 1 (voice)
+
+Running: Voice Coach
+
+Processing...
+
+========================================
+QUALITY CHECK COMPLETE
+========================================
+
+**Overall Status:** PASS WITH SUGGESTIONS
+
+**Summary:**
+  Critical: 0
+  Major:    0
+  Minor:    2
+
+**Scenes Checked:** 5
+
+========================================
+
+| Checker           | Critical | Major | Minor | Status      |
+|-------------------|----------|-------|-------|-------------|
+| Canon Checker     | -        | -     | -     | NOT RUN     |
+| Timeline Keeper   | -        | -     | -     | NOT RUN     |
+| Voice Coach       | 0        | 0     | 2     | SUGGESTIONS |
+| Pacing Analyzer   | -        | -     | -     | NOT RUN     |
+| Tension Monitor   | -        | -     | -     | NOT RUN     |
+
+========================================
+MINOR ISSUES (Nice to Fix)
+========================================
+
+Found 2 minor issues across scenes.
+See full report for details: check_reports/2026-02-24_15-45/summary.md
+
+========================================
+RECOMMENDATIONS
+========================================
+
+1. Review cliche usage in ch01_s03
+2. No major issues - scenes are voice-consistent
+
+========================================
+
+NOTE: Single checker mode - editorial letter and quality gate not generated.
+Run full check for complete revision workflow: /novel:check
+
+========================================
+
+NEXT STEPS:
+
+  1. Review suggestions: check_reports/2026-02-24_15-45/summary.md (optional)
+  2. Scenes are ready for publication
+  3. Mark scenes as "checked" in scene_index
+
+  Run full check to see all quality dimensions: /novel:check
+
+========================================
+
+Full report saved to:
+  check_reports/2026-02-24_15-45/summary.md
+
+Individual checker reports:
+  voice_check.json
+
+========================================
+```
+
+---
+
+## Example 3: Clean Pass (No Issues)
+
+**Command:** `/novel:check`
+
+**Scenario:** All scenes pass all quality checks
+
+**Console Output:**
+```
+========================================
+RUNNING QUALITY CHECKS
+========================================
+
+Scenes to check: 12
+Checkers: 5
+
+Running in parallel:
+  - Canon Checker: Verifying facts against canon
+  - Timeline Keeper: Checking chronological integrity
+  - Voice Coach: Analyzing POV, tense, and style
+  - Pacing Analyzer: Evaluating scene rhythm
+  - Tension Monitor: Measuring conflict and stakes
+
+Processing...
+
+========================================
+QUALITY CHECK COMPLETE
+========================================
+
+**Overall Status:** PASS
+
+**Summary:**
+  Critical: 0
+  Major:    0
+  Minor:    0
+
+**Scenes Checked:** 12
+
+========================================
+
+| Checker           | Critical | Major | Minor | Status |
+|-------------------|----------|-------|-------|--------|
+| Canon Checker     | 0        | 0     | 0     | PASS   |
+| Timeline Keeper   | 0        | 0     | 0     | PASS   |
+| Voice Coach       | 0        | 0     | 0     | PASS   |
+| Pacing Analyzer   | 0        | 0     | 0     | PASS   |
+| Tension Monitor   | 0        | 0     | 0     | PASS   |
+
+========================================
+RECOMMENDATIONS
+========================================
+
+1. All quality checks passed
+2. No issues found
+3. Scenes are ready for publication
+
+========================================
+QUALITY GATE DECISION
+========================================
+
+**Overall Status:** APPROVED
+All scenes meet quality criteria
+
+**Criteria Applied:**
+  CRITICAL threshold: 0 (0 = hard blocker)
+  MAJOR threshold:    2 per scene
+  MINOR threshold:    999 (advisory only)
+
+**Scene Results:**
+  Evaluated:      12
+  Approved:       12
+  Need Revision:  0
+
+**All scenes approved!** Ready for publication.
+
+========================================
+
+EDITORIAL LETTER:
+  check_reports/2026-02-24_16-00/editorial_letter.md
+
+  Contains:
+  - What Works Well (1-3 items)
+  - Revision Priorities (Must/Should/Could)
+  - Revision Plan with time estimates
+  - Next Steps
+
+  Review for detailed revision guidance.
+
+========================================
+OUTPUT FILES
+========================================
+
+Check Report Directory:
+  check_reports/2026-02-24_16-00
+
+Files Generated:
+  - summary.md              (consolidated quality report)
+  - canon_check.json        (canon checker output)
+  - timeline_check.json     (timeline keeper output)
+  - voice_check.json        (voice coach output)
+  - pacing_check.json       (pacing analyzer output)
+  - tension_check.json      (tension monitor output)
+  - editorial_letter.md     (editorial feedback)
+  - quality_decision.json   (approval decision)
+
+State Updates:
+  - story_state.json updated with scene statuses and revision history
+
+========================================
+
+NEXT STEPS:
+
+  All scenes approved! Manuscript ready for next phase.
+
+  1. Review editorial letter for optional polish suggestions
+  2. Proceed to /novel:publish (Phase 6 feature)
+  3. Run /novel:check periodically during future drafting
+
+========================================
+
+Full report saved to:
+  check_reports/2026-02-24_16-00/summary.md
+
+Individual checker reports:
+  canon_check.json
+  timeline_check.json
+  voice_check.json
+  pacing_check.json
+  tension_check.json
+
+========================================
+```
+
+</examples>
+
+---
+
 ## Notes
 
 **Parallel Execution:**
 The five checker agents are independent - they read different data sources and don't modify state files. Parallel execution provides significant performance benefits (5x faster than sequential).
+
+**Sequential Editor/Quality Gate:**
+The novel-editor and novel-quality-gate agents run sequentially AFTER all checkers complete. Editor provides editorial synthesis, quality gate makes approval decisions.
 
 **Severity Prioritization:**
 Issues are sorted CRITICAL → MAJOR → MINOR to guide user attention. Critical issues block publication, major issues should be fixed, minor issues are suggestions.
@@ -1127,8 +1998,17 @@ Issues are sorted CRITICAL → MAJOR → MINOR to guide user attention. Critical
 **Report Versioning:**
 Timestamped directories preserve check history. Users can compare before/after reports to track quality improvements over revisions.
 
+**Revision Tracking:**
+Each check cycle appends to scene revision_history in story_state.json. This enables tracking of issue resolution across multiple revision attempts.
+
 **Partial Results:**
-If one checker fails, others continue. Partial quality data is better than no data.
+If one checker fails, others continue. If editor fails, quality gate can still run. Partial quality data is better than no data.
+
+**Scene Status Lifecycle:**
+Scene status progresses: planned → drafted → needs_revision ⇄ approved
+- Quality gate sets "needs_revision" or "approved" based on criteria
+- User revises scenes with "needs_revision" status
+- Next /novel:check re-evaluates and may approve
 
 **No Auto-Fix:**
 Version 1.0 reports issues but doesn't automatically fix them. Auto-fix capability planned for future version.
