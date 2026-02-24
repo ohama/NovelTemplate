@@ -8,8 +8,9 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "description": "Schema version for migration support",
-      "pattern": "^\\d+\\.\\d+$"
+      "description": "Schema version for migration support (1.1 adds revision tracking)",
+      "pattern": "^\\d+\\.\\d+$",
+      "const": "1.1"
     },
     "project": {
       "type": "object",
@@ -181,7 +182,84 @@
           "status": {
             "type": "string",
             "description": "Scene completion status",
-            "enum": ["planned", "drafted", "checked", "revised", "approved"]
+            "enum": ["planned", "drafted", "needs_revision", "approved"]
+          },
+          "revision_count": {
+            "type": "integer",
+            "description": "Number of revision cycles for this scene",
+            "minimum": 0,
+            "default": 0
+          },
+          "revision_history": {
+            "type": "array",
+            "description": "History of revision cycles with check reports and decisions",
+            "items": {
+              "type": "object",
+              "required": ["cycle", "timestamp", "check_report", "issues_found", "decision"],
+              "properties": {
+                "cycle": {
+                  "type": "integer",
+                  "description": "Revision cycle number",
+                  "minimum": 1
+                },
+                "timestamp": {
+                  "type": "string",
+                  "description": "When this check was performed (ISO 8601)",
+                  "format": "date-time"
+                },
+                "check_report": {
+                  "type": "string",
+                  "description": "Path to check_reports directory for this cycle"
+                },
+                "issues_found": {
+                  "type": "object",
+                  "description": "Issue counts from quality check",
+                  "properties": {
+                    "critical": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "major": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "minor": {
+                      "type": "integer",
+                      "minimum": 0
+                    }
+                  }
+                },
+                "decision": {
+                  "type": "string",
+                  "description": "Quality gate decision for this cycle",
+                  "enum": ["approved", "needs_revision"]
+                },
+                "blocking_issues": {
+                  "type": "array",
+                  "description": "Brief descriptions of blocking issues",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "editorial_focus": {
+                  "type": "array",
+                  "description": "Checkers that flagged this scene",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "last_check": {
+            "type": "string",
+            "description": "Timestamp of most recent quality check (ISO 8601)",
+            "format": "date-time"
+          },
+          "approved_at": {
+            "type": "string",
+            "description": "Timestamp when scene was approved (ISO 8601)",
+            "format": "date-time"
           },
           "word_count": {
             "type": "integer",

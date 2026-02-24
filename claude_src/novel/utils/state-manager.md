@@ -355,5 +355,152 @@ When state operations fail, the system should continue operating:
 
 ---
 
+## Scene Status Lifecycle
+
+Scenes progress through a defined status lifecycle managed by the quality gate:
+
+```
+planned → drafted → needs_revision ⇄ approved
+```
+
+**Status Definitions:**
+
+| Status | Description | Next Actions |
+|--------|-------------|--------------|
+| `planned` | Scene has beat sheet but no prose | Run `/novel:write` to draft |
+| `drafted` | Scene has prose, not yet checked | Run `/novel:check` to evaluate |
+| `needs_revision` | Quality gate flagged issues | Fix issues, run `/novel:check` again |
+| `approved` | Quality gate approved scene | Ready for publication |
+
+**Status Transitions:**
+
+1. **planned → drafted:** Set by scene-writer agent when prose file created
+2. **drafted → needs_revision:** Set by `/novel:check` when scene fails quality gate
+3. **drafted → approved:** Set by `/novel:check` when scene passes quality gate
+4. **needs_revision → approved:** Set by `/novel:check` after successful revision
+5. **needs_revision → needs_revision:** Stays same if still has blocking issues
+
+**Important:** A scene can cycle between `needs_revision` and `approved` multiple times as changes are made and rechecked.
+
+---
+
+## Revision Tracking
+
+Each scene tracks its revision history for audit and progress monitoring.
+
+### Revision Count
+
+```json
+{
+  "scene_id": "ch03_s02",
+  "revision_count": 2
+}
+```
+
+The `revision_count` field tracks how many quality check cycles this scene has been through. Incremented each time `/novel:check` runs for this scene.
+
+### Revision History Array
+
+Each check cycle appends an entry to `revision_history`:
+
+```json
+{
+  "scene_id": "ch03_s02",
+  "revision_history": [
+    {
+      "cycle": 1,
+      "timestamp": "2026-02-24T14:30:00Z",
+      "check_report": "check_reports/2026-02-24_14-30",
+      "issues_found": {
+        "critical": 0,
+        "major": 2,
+        "minor": 1
+      },
+      "decision": "needs_revision",
+      "blocking_issues": [
+        "character_voice: POV character uses vocabulary inconsistent with established voice",
+        "style_guide: Forbidden phrase violates conversational tone rule"
+      ],
+      "editorial_focus": ["voice-coach"]
+    },
+    {
+      "cycle": 2,
+      "timestamp": "2026-02-24T15:45:00Z",
+      "check_report": "check_reports/2026-02-24_15-45",
+      "issues_found": {
+        "critical": 0,
+        "major": 0,
+        "minor": 1
+      },
+      "decision": "approved",
+      "blocking_issues": [],
+      "editorial_focus": []
+    }
+  ]
+}
+```
+
+### Revision History Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `cycle` | integer | Revision cycle number (1, 2, 3...) |
+| `timestamp` | string | ISO 8601 timestamp of check |
+| `check_report` | string | Path to check_reports directory |
+| `issues_found` | object | Issue counts by severity |
+| `decision` | string | "approved" or "needs_revision" |
+| `blocking_issues` | array | Brief descriptions of blocking issues |
+| `editorial_focus` | array | Checkers that flagged this scene |
+
+### Timestamps
+
+Two additional timestamp fields track check and approval times:
+
+```json
+{
+  "scene_id": "ch03_s02",
+  "last_check": "2026-02-24T15:45:00Z",
+  "approved_at": "2026-02-24T15:45:00Z"
+}
+```
+
+- `last_check`: Updated every time `/novel:check` evaluates this scene
+- `approved_at`: Set when scene status becomes "approved"
+
+### Accessing Revision Data
+
+**Get current revision count:**
+```markdown
+1. Load story_state.json
+2. Find scene in scene_index by id
+3. Read scene.revision_count (default 0 if missing)
+```
+
+**Get most recent check result:**
+```markdown
+1. Load story_state.json
+2. Find scene in scene_index by id
+3. Get last element of scene.revision_history array
+4. Read decision, issues_found, blocking_issues
+```
+
+**Check if scene needs attention:**
+```markdown
+1. Load story_state.json
+2. Filter scene_index for status == "needs_revision"
+3. For each scene, read blocking_issues from most recent revision_history entry
+```
+
+**Calculate improvement across cycles:**
+```markdown
+1. Load story_state.json
+2. Find scene in scene_index
+3. Compare issues_found.major from first and last revision_history entries
+4. If decreasing: Scene is improving
+5. If same/increasing after 3+ cycles: Flag for manual review
+```
+
+---
+
 *State Manager Skill v1.0*
 *For use with Novel Engine state management*
