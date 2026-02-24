@@ -73,25 +73,11 @@ Plans:
 - Scenes maintain character voice from style_guide.md
 - Markdown files are well-formatted with proper headers and scene breaks
 
-**Plans:**
-1. **Scene Writer Agent**
-   - Build novel-scene-writer agent
-   - Read beat spec and canon files
-   - Generate prose matching style_guide.md
-   - Output draft/scene_XXX.md in Markdown
+**Plans:** 2 plans
 
-2. **Diary Format Features**
-   - Implement date/time tracking (DIARY-01) in timeline_state.json
-   - Add season/weather tracking (DIARY-02) with natural descriptions
-   - Track emotional arcs (DIARY-03) in character_state.json
-   - Track growth milestones (DIARY-04) for character development
-
-3. **/novel:write Command & Markdown Output**
-   - Build writing skill
-   - Orchestrate scene-writer agent
-   - Auto-increment scene numbers
-   - Git commit completed scenes
-   - Format Markdown with metadata headers
+Plans:
+- [ ] 03-01-PLAN.md — Scene Writer Agent (prose generation, diary format, Markdown output)
+- [ ] 03-02-PLAN.md — /novel:write Command (orchestrate scene-writer, git commit, verification)
 
 ---
 
@@ -230,4 +216,5 @@ Plans:
 *Roadmap created: 2026-02-24*
 *Phase 1 completed: 2026-02-24*
 *Phase 2 completed: 2026-02-24*
-*Next step: Plan Phase 3*
+*Phase 3 planned: 2026-02-24*
+*Next step: Execute Phase 3*
