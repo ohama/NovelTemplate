@@ -3,7 +3,7 @@
 **Project Start:** 2026-02-24
 **Last Updated:** 2026-02-24
 **Current Phase:** 2 (Planning Pipeline) - IN PROGRESS
-**Current Plan:** 02-01 Complete
+**Current Plan:** 02-02 Complete
 
 ---
 
@@ -15,10 +15,10 @@
 
 **Progress:**
 - Phases completed: 1/6
-- Plans completed: 4/18
-- Requirements completed: ~13/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent)
+- Plans completed: 5/18
+- Requirements completed: ~14/35 (schemas, defaults, state-manager, templates, init command, canon templates, status command, git integration, plot-planner agent, beat-planner agent)
 
-**Progress Bar:** [===========---------] 22%
+**Progress Bar:** [===========−--------] 28%
 
 ---
 
@@ -35,7 +35,7 @@
 | Phase | Name | Status | Requirements | Plans | Completion |
 |-------|------|--------|--------------|-------|------------|
 | 1 | Foundation & Canon System | COMPLETE | 12 | 3 | 100% |
-| 2 | Planning Pipeline | In Progress | 4 | 3 | 33% |
+| 2 | Planning Pipeline | In Progress | 4 | 3 | 67% |
 | 3 | Drafting Engine | Pending | 8 | 3 | 0% |
 | 4 | Quality Checks | Pending | 6 | 3 | 0% |
 | 5 | Revision Loop | Pending | 2 | 3 | 0% |
@@ -46,10 +46,10 @@
 ## Active Work
 
 **Current Phase:** 2 - Planning Pipeline (IN PROGRESS)
-**Current Plan:** 02-01 Complete
+**Current Plan:** 02-02 Complete
 **Active Tasks:** None
 
-**Ready for:** Plan 02-02 (Chapter breakdown) or continue Phase 2 planning agents
+**Ready for:** Plan 02-03 or continue Phase 2 planning agents
 
 ---
 
@@ -57,19 +57,19 @@
 
 | Date | Activity |
 |------|----------|
+| 2026-02-24 | Completed Plan 02-02: Beat Planner Agent |
 | 2026-02-24 | Completed Plan 02-01: Plot Planner Agent |
 | 2026-02-24 | Completed Plan 01-03: /novel:status Command & Git Integration |
 | 2026-02-24 | Completed Plan 01-02: /novel:init Command |
-| 2026-02-24 | Completed Plan 01-01: Directory Structure & State Initialization |
 
 ---
 
 ## Next Steps
 
 1. Continue Phase 2: Planning Pipeline
-2. Execute Plan 02-02: Chapter breakdown and scene planning
-3. Execute Plan 02-03: Additional planning agents as needed
-4. Build multi-agent coordination pipeline
+2. Execute Plan 02-03: Additional planning agents as needed
+3. Build multi-agent coordination pipeline
+4. Move to Phase 3: Drafting Engine
 
 ---
 
@@ -94,6 +94,10 @@
 | 2026-02-24 | Save the Cat as primary framework | 15-beat structure with percentage-based markers, Hero's Journey as optional overlay |
 | 2026-02-24 | Beat percentage system | Each beat maps to specific story percentage and word count for precise targeting |
 | 2026-02-24 | Character arc mapping to plot | Track emotional state, lie→truth progression across all beats for coherence |
+| 2026-02-24 | Scene ID format chXX_sYY with zero-padding | Ensures alphabetical sorting matches chronological order, consistent parsing with regex |
+| 2026-02-24 | Beat sheets are 150-300 word planning notes | Provides structure for scene-writer without over-constraining creative decisions (progressive disclosure) |
+| 2026-02-24 | 2-5 scenes per chapter based on complexity | Balances narrative granularity with practical drafting workload |
+| 2026-02-24 | POV rotation logic for multi-POV stories | Respects narrative voice decisions while ensuring fair character representation |
 
 ---
 
@@ -123,8 +127,8 @@
 ## Session Continuity
 
 **Last session:** 2026-02-24 05:32 UTC
-**Stopped at:** Completed Plan 02-01 (Plot Planner Agent)
-**Resume file:** .planning/phases/02-planning-pipeline/02-02-PLAN.md
+**Stopped at:** Completed Plan 02-02 (Beat Planner Agent)
+**Resume file:** .planning/phases/02-planning-pipeline/02-03-PLAN.md
 
 ---
 
