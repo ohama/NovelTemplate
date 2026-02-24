@@ -1,0 +1,18 @@
+{
+  "project": {
+    "title": "Untitled Novel",
+    "version": "0.1"
+  },
+  "progress": {
+    "outline": "not_started",
+    "beat_plan": "not_started",
+    "draft": "not_started"
+  },
+  "current": {
+    "chapter": 1,
+    "scene": 1
+  },
+  "open_threads": [],
+  "resolved_threads": [],
+  "scene_index": []
+}

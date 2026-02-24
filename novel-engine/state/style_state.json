@@ -1,0 +1,15 @@
+{
+  "pov": "3rd_limited",
+  "tense": "past",
+  "voice": "clean",
+  "forbidden_phrases": [
+    "suddenly",
+    "all at once",
+    "couldn't help but"
+  ],
+  "cliche_watchlist": [
+    "eyes widened",
+    "heart pounded",
+    "let out a breath she didn't realize she was holding"
+  ]
+}

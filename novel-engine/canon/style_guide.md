@@ -1,0 +1,13 @@
+# Style Guide
+- POV: (1st/3rd limited/omniscient)
+- Tense: (past/present)
+- Narrative distance: (close/medium/far)
+- Diction: (plain/lyrical/technical)
+- Dialogue rules:
+  - Keep lines short, subtext-forward
+  - Avoid exposition dumps
+- Forbidden:
+  - "suddenly", "all at once", "couldn't help but"
+  - excessive adverbs
+- Signature motifs:
+  - (e.g., weather imagery, clocks, smell)
