@@ -374,7 +374,7 @@ Continue for antagonist and key supporting characters.
 
 Use state-manager skill to update story_state.json with outline completion.
 
-**Skill Reference:** `claude_src/novel/utils/state-manager.md`
+**Skill Reference:** `.claude/novel/utils/state-manager.md`
 
 ### Update 4.1: Progress Status
 
@@ -1024,5 +1024,5 @@ To view current outline:
 </edge_cases>
 
 <skills_used>
-- state-manager: For loading and updating story_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading and updating story_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>

@@ -967,7 +967,7 @@ Based on 5 checker reports: canon, timeline, voice, pacing, tension
 ---
 
 <skills_used>
-- state-manager: For reading story_state.json project metadata (claude_src/novel/utils/state-manager.md)
+- state-manager: For reading story_state.json project metadata (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

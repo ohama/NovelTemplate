@@ -748,7 +748,7 @@ All scenes maintain consistent POV, tense, and voice. No forbidden phrases detec
 ---
 
 <skills_used>
-- state-manager: For loading style_state.json, character_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading style_state.json, character_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

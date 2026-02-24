@@ -813,7 +813,7 @@ No timeline violations detected. All scenes are chronologically consistent, date
 ---
 
 <skills_used>
-- state-manager: For loading timeline_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading timeline_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

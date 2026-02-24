@@ -832,7 +832,7 @@ All scenes maintain appropriate length for their beat types.
 ---
 
 <skills_used>
-- state-manager: For loading story_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading story_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

@@ -1136,7 +1136,7 @@ After quality_decision.json is written, /novel:check should:
 ---
 
 <skills_used>
-- state-manager: For reading quality_criteria.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For reading quality_criteria.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

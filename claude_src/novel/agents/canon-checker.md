@@ -632,7 +632,7 @@ No canon contradictions detected. All character facts, world details, and story 
 ---
 
 <skills_used>
-- state-manager: For loading character_state.json and timeline_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading character_state.json and timeline_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---

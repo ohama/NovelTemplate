@@ -904,7 +904,7 @@ Alex slipped the fragment into her jacket and headed for the stairs, moving fast
 ---
 
 <skills_used>
-- state-manager: For loading and updating story_state.json, character_state.json, timeline_state.json (claude_src/novel/utils/state-manager.md)
+- state-manager: For loading and updating story_state.json, character_state.json, timeline_state.json (.claude/novel/utils/state-manager.md)
 </skills_used>
 
 ---
