@@ -372,23 +372,28 @@ If user declines (N/n/no):
 
 Initialize git repository and create .gitignore.
 
+**Skill Reference:** Use patterns from `claude_src/novel/skills/git-integration.md`
+
 ### Git Initialization:
 
 ```markdown
-1. Check if already in a git repository:
-   Run: git rev-parse --is-inside-work-tree 2>/dev/null
+1. Check git available using check_git_available():
+   Run: git --version 2>/dev/null
 
-2. If NOT in git repository:
-   Run: git init
-
-   If git init fails (git not installed):
+   If command fails:
      WARNING: Git is not available.
      Project created without version control.
      Consider installing git for version history.
 
      Continue (this is a warning, not a blocker).
 
-3. If already in git repository:
+2. Check if already in a git repository using check_git_repo():
+   Run: git rev-parse --is-inside-work-tree 2>/dev/null
+
+3. If NOT in git repository:
+   Run: git init
+
+4. If already in git repository:
    Log: Using existing git repository.
 ```
 
@@ -419,16 +424,29 @@ Thumbs.db
 
 ### Initial Commit:
 
+Use the commit_init(title, format) function from git-integration skill:
+
 ```markdown
-If git is available and this is a new repository:
-  1. Stage: git add canon/ state/ beats/ draft/ .gitignore
-  2. Commit with message:
-     "Initialize novel project: [Title]
+If git is available:
+  1. Check git_integration.enabled in story_state.json (default: true)
+     - If false, skip commit silently
+
+  2. Stage all project files:
+     git add canon/ state/ beats/ draft/ .gitignore
+
+  3. Commit using heredoc format:
+     git commit -m "$(cat <<'EOF'
+     Initialize novel project: [Title]
 
      Created directory structure and canon templates.
      Format: [format]
 
-     Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"
+     Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
+     EOF
+     )"
+
+  4. If commit succeeds:
+     Log: "Created initial commit: [hash]"
 
 If commit fails:
   WARNING: Could not create initial commit.
@@ -807,5 +825,6 @@ No project files were created.
 </edge_cases>
 
 <skills_used>
-- state-manager: For loading default state files and validation patterns
+- state-manager: For loading default state files and validation patterns (claude_src/novel/utils/state-manager.md)
+- git-integration: For initial commit and git setup (claude_src/novel/skills/git-integration.md)
 </skills_used>
