@@ -1,0 +1,1 @@
+../../../claude_src/novel/commands/write.md
