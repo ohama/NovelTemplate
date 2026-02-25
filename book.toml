@@ -1,0 +1,16 @@
+[book]
+title = "Novel Engine"
+authors = ["ohama"]
+description = "AI 기반 소설 집필 파이프라인 for Claude Code"
+language = "ko"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/ohama/NovelTemplate"
+edit-url-template = "https://github.com/ohama/NovelTemplate/edit/master/{path}"
+site-url = "/NovelTemplate/"
