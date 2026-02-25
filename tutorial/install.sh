@@ -45,7 +45,17 @@ mkdir -p "$TARGET_DIR/.claude/commands"
 cp -r "$SOURCE_DIR/commands/novel" "$TARGET_DIR/.claude/commands/"
 cp -r "$SOURCE_DIR/novel" "$TARGET_DIR/.claude/"
 
-echo "[2/2] 설치 확인..."
+# GitHub Pages 템플릿 복사
+if [ -d "$SOURCE_DIR/github-pages" ]; then
+    echo "[2/3] GitHub Pages 템플릿 복사 중..."
+    cp -r "$SOURCE_DIR/github-pages/.github" "$TARGET_DIR/" 2>/dev/null || true
+    cp "$SOURCE_DIR/github-pages/book.toml" "$TARGET_DIR/" 2>/dev/null || true
+    mkdir -p "$TARGET_DIR/src"
+    cp -r "$SOURCE_DIR/github-pages/src/"* "$TARGET_DIR/src/" 2>/dev/null || true
+    echo "  book.toml, src/, .github/workflows/ 복사됨"
+fi
+
+echo "[3/3] 설치 확인..."
 echo ""
 echo "설치된 파일:"
 echo "  .claude/commands/novel/  (명령어 7개)"
@@ -54,6 +64,11 @@ echo "  .claude/novel/skills/    (스킬 3개)"
 echo "  .claude/novel/schemas/   (스키마 10개)"
 echo "  .claude/novel/templates/ (템플릿)"
 echo "  .claude/novel/utils/     (유틸리티)"
+echo ""
+echo "GitHub Pages (선택):"
+echo "  book.toml                 (mdBook 설정)"
+echo "  src/                      (mdBook 소스)"
+echo "  .github/workflows/        (자동 배포)"
 
 echo ""
 echo "=== 설치 완료! ==="
