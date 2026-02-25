@@ -6,7 +6,7 @@ language = "ko"
 src = "src"
 
 [build]
-build-dir = "doc"
+build-dir = "docs"
 
 [output.html]
 default-theme = "light"
