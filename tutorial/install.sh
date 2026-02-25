@@ -52,6 +52,12 @@ if [ -d "$SOURCE_DIR/github-pages" ]; then
     cp "$SOURCE_DIR/github-pages/book.toml" "$TARGET_DIR/" 2>/dev/null || true
     mkdir -p "$TARGET_DIR/src"
     cp -r "$SOURCE_DIR/github-pages/src/"* "$TARGET_DIR/src/" 2>/dev/null || true
+
+    # scenes 심볼릭 링크 생성 (mdBook이 src/ 외부 경로를 처리 못함)
+    if [ ! -L "$TARGET_DIR/src/scenes" ]; then
+        ln -sf ../draft/scenes "$TARGET_DIR/src/scenes"
+        echo "  src/scenes -> ../draft/scenes 심볼릭 링크 생성"
+    fi
     echo "  book.toml, src/, .github/workflows/ 복사됨"
 fi
 

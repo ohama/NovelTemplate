@@ -714,10 +714,14 @@ my-novel/
 ├── book.toml                    ← mdBook 설정
 ├── src/
 │   ├── SUMMARY.md              ← 목차 (씬 목록)
-│   └── README.md               ← 소설 소개 (링크)
+│   ├── README.md               ← 소설 소개 (링크)
+│   └── scenes/                 ← ../draft/scenes 심볼릭 링크
 └── .github/workflows/
     └── mdbook.yml              ← 자동 배포 워크플로우
 ```
+
+> **참고:** `src/scenes`는 `../draft/scenes`로의 심볼릭 링크입니다.
+> mdBook은 `src/` 외부 경로를 처리하지 못하므로 심볼릭 링크가 필요합니다.
 
 ### 설정 방법
 
@@ -738,9 +742,11 @@ authors = ["작가 이름"]
 
 # 본문
 
-- [1장 1절](../draft/scenes/ch01_s01.md)
-- [1장 2절](../draft/scenes/ch01_s02.md)
+- [1장 1절](scenes/ch01_s01.md)
+- [1장 2절](scenes/ch01_s02.md)
 ```
+
+> **주의:** 경로는 `scenes/xxx.md` 형식 사용 (`../draft/scenes/` 아님)
 
 **3. GitHub Pages 활성화:**
 
