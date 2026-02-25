@@ -342,6 +342,16 @@ You are the **Scene Writer Agent**...
 - plot-coherence-checker (복선 추적) 추가
 - story-quality-agent (서사 품질) 추가
 
+### 6. GitHub Pages 배포
+
+**novel-engine:** 지원 안 함
+
+**claude_src:**
+- mdBook 기반 웹 배포
+- GitHub Actions 자동 빌드
+- Push만으로 자동 배포
+- `https://username.github.io/my-novel/`
+
 ---
 
 ## 명명 규칙 변경

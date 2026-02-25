@@ -16,6 +16,7 @@ Novel Engine은 Claude Code에서 동작하는 소설 집필 자동화 시스템
 - **7개 병렬 체커**: 설정, 시간선, 문체, 페이싱, 긴장감, 복선, 서사 품질
 - **버전 관리**: 스냅샷, diff, 롤백
 - **EPUB 출판**: Pandoc 기반 전자책 생성
+- **GitHub Pages**: mdBook 기반 웹 배포 (자동)
 
 ---
 
@@ -152,12 +153,13 @@ my-novel/
 NovelTemplate/
 ├── claude_src/         ← Novel Engine 소스 코드
 │   ├── commands/novel/     슬래시 명령어 (7개)
-│   └── novel/
-│       ├── agents/         에이전트 정의 (13개)
-│       ├── skills/         유틸리티 스킬 (3개)
-│       ├── schemas/        JSON 스키마 (5쌍)
-│       ├── templates/      캐논/디렉토리 템플릿
-│       └── utils/          유틸리티
+│   ├── novel/
+│   │   ├── agents/         에이전트 정의 (13개)
+│   │   ├── skills/         유틸리티 스킬 (3개)
+│   │   ├── schemas/        JSON 스키마 (5쌍)
+│   │   ├── templates/      캐논/디렉토리 템플릿
+│   │   └── utils/          유틸리티
+│   └── github-pages/       GitHub Pages 템플릿
 ├── novel-engine/       ← 원본 참조 구현 (비교용)
 └── tutorial/           ← 튜토리얼 문서
 ```

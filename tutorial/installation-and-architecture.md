@@ -703,6 +703,59 @@ chmod -R u+w .
 
 ---
 
+## GitHub Pages 배포
+
+소설 프로젝트를 웹에서 읽을 수 있도록 GitHub Pages로 배포할 수 있습니다.
+
+### 설치 시 포함되는 파일
+
+```
+my-novel/
+├── book.toml                    ← mdBook 설정
+├── src/
+│   ├── SUMMARY.md              ← 목차 (씬 목록)
+│   └── README.md               ← 소설 소개 (링크)
+└── .github/workflows/
+    └── mdbook.yml              ← 자동 배포 워크플로우
+```
+
+### 설정 방법
+
+**1. book.toml 수정:**
+
+```toml
+[book]
+title = "내 소설 제목"
+authors = ["작가 이름"]
+```
+
+**2. src/SUMMARY.md에 씬 추가:**
+
+```markdown
+# Summary
+
+[소개](README.md)
+
+# 본문
+
+- [1장 1절](../draft/scenes/ch01_s01.md)
+- [1장 2절](../draft/scenes/ch01_s02.md)
+```
+
+**3. GitHub Pages 활성화:**
+
+1. GitHub 저장소 Settings → Pages
+2. Source → `GitHub Actions` 선택
+
+**4. Push → 자동 배포:**
+
+```bash
+git push
+# → https://username.github.io/my-novel/
+```
+
+---
+
 ## 확장하기
 
 ### 새 에이전트 추가
